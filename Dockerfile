@@ -25,6 +25,14 @@ WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
+# Build-time placeholders only. Runtime credentials must be injected into the final container.
+ARG DATABASE_URL=postgres://postgres:postgres@127.0.0.1:5432/zgcllm_build
+ARG NEXT_PUBLIC_SITE_URL=https://www.zgcllm.org.cn
+ARG PAYLOAD_SECRET=build-only-placeholder-secret-never-used-at-runtime
+ENV DATABASE_URL=$DATABASE_URL
+ENV NEXT_PUBLIC_SITE_URL=$NEXT_PUBLIC_SITE_URL
+ENV PAYLOAD_SECRET=$PAYLOAD_SECRET
+
 # Next.js collects completely anonymous telemetry data about general usage.
 # Learn more here: https://nextjs.org/telemetry
 # Uncomment the following line in case you want to disable telemetry during the build.

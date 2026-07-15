@@ -1,10 +1,11 @@
-import { CORE_MODULES, SITE_NAME, SITE_URL } from '@/config/site'
+import { CORE_MODULES, resolveSiteUrl, SITE_NAME } from '@/config/site'
 import { describe, expect, it } from 'vitest'
 
 describe('site configuration', () => {
   it('uses the alliance brand and canonical production domain', () => {
     expect(SITE_NAME).toBe('中关村自主大模型产业联盟')
-    expect(SITE_URL).toBe('https://www.zgcllm.org.cn')
+    expect(resolveSiteUrl()).toBe('https://www.zgcllm.org.cn')
+    expect(resolveSiteUrl('http://localhost:3000')).toBe('http://localhost:3000')
   })
 
   it('defines the six agreed website modules with unique slugs', () => {

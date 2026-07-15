@@ -48,8 +48,8 @@ pnpm build           # 生产构建
 pnpm typecheck       # TypeScript 类型检查
 pnpm lint            # ESLint 检查
 pnpm test            # 无外部依赖的单元测试
-pnpm test:int        # Payload 集成测试，需要 PostgreSQL
-pnpm test:e2e        # Playwright 端到端测试
+pnpm test:int        # Payload 集成测试，需要本机 zgcllm_test 数据库
+pnpm test:e2e        # Playwright 端到端测试，需要本机 zgcllm_test 数据库
 pnpm generate:types  # 根据 Payload 配置生成类型
 ```
 
@@ -79,3 +79,5 @@ tests/
 - ICP 备案、HTTPS 证书、WAF、备份与日志脱敏；
 - 申请表隐私告知、明确同意、附件权限和数据保留策略；
 - 生产密钥和数据库凭据通过部署平台注入，不写入仓库。
+
+测试种子脚本只接受 `test.env` 中显式配置的本机 `_test` 数据库，拒绝连接其他数据库。

@@ -10,6 +10,15 @@ import { Media } from './collections/Media'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
+const payloadSecret = process.env.PAYLOAD_SECRET
+
+if (
+  !payloadSecret ||
+  payloadSecret.length < 32 ||
+  payloadSecret === 'replace-with-a-random-secret-of-at-least-32-characters'
+) {
+  throw new Error('PAYLOAD_SECRET must be set to a random value of at least 32 characters')
+}
 
 export default buildConfig({
   admin: {
@@ -20,7 +29,7 @@ export default buildConfig({
   },
   collections: [Users, Media],
   editor: lexicalEditor(),
-  secret: process.env.PAYLOAD_SECRET || '',
+  secret: payloadSecret,
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),
   },

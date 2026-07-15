@@ -1,4 +1,7 @@
-// Any setup scripts you might need go here
+import { config } from 'dotenv'
 
-// Load .env files
-import 'dotenv/config'
+config({ path: 'test.env', override: true })
+
+if (process.env.TEST_DATABASE_URL) {
+  process.env.DATABASE_URL = process.env.TEST_DATABASE_URL
+}

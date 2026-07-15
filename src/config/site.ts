@@ -1,7 +1,12 @@
 export const SITE_NAME = '中关村自主大模型产业联盟'
 export const SITE_DESCRIPTION =
   '中关村自主大模型产业联盟官方网站，发布联盟动态、工作组信息、成员名录及入盟申请服务。'
-export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://www.zgcllm.org.cn'
+
+export function resolveSiteUrl(configuredUrl?: string): string {
+  return configuredUrl || 'https://www.zgcllm.org.cn'
+}
+
+export const SITE_URL = resolveSiteUrl(process.env.NEXT_PUBLIC_SITE_URL)
 
 export interface CoreModule {
   description: string

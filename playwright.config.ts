@@ -13,9 +13,9 @@ if (process.env.TEST_DATABASE_URL) {
   process.env.DATABASE_URL = process.env.TEST_DATABASE_URL
 }
 
-const e2ePort = resolveE2EPort(process.env.E2E_PORT)
-const localBaseURL = `http://127.0.0.1:${e2ePort}`
 const remoteBaseURL = resolveE2EBaseURL(process.env.E2E_BASE_URL)
+const e2ePort = resolveE2EPort(remoteBaseURL ? undefined : process.env.E2E_PORT)
+const localBaseURL = `http://127.0.0.1:${e2ePort}`
 const e2eBaseURL = remoteBaseURL ?? localBaseURL
 
 /**

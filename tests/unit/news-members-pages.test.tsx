@@ -67,6 +67,24 @@ describe('members page', () => {
     expect(screen.getByText('获授权科研伙伴')).toBeTruthy()
   })
 
+  it('test_members_directory_skipped_middle_group_still_alternates_section_style', () => {
+    const members: readonly MemberSummary[] = [
+      { id: 'founder', name: '获授权发起成员', type: 'founding' },
+      { id: 'researcher', name: '获授权科研伙伴', type: 'research' },
+    ]
+
+    render(<MembersDirectory members={members} />)
+
+    const foundingHeading = screen.getByRole('heading', { name: '发起成员' })
+    const researchHeading = screen.getByRole('heading', { name: '科研伙伴' })
+    const foundingSection = foundingHeading.closest('section')
+    const researchSection = researchHeading.closest('section')
+
+    expect(foundingSection).not.toBeNull()
+    expect(researchSection).not.toBeNull()
+    expect(foundingSection?.className).not.toBe(researchSection?.className)
+  })
+
   it('test_members_metadata_page_has_independent_title_and_canonical', () => {
     expect(membersMetadata.title).toBe('成员伙伴')
     expect(membersMetadata.description).toContain('公开授权')

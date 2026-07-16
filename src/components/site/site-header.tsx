@@ -2,7 +2,9 @@ import Link from 'next/link'
 import type { ReactElement } from 'react'
 
 import { SITE_NAME, SITE_NAVIGATION } from '@/config/site'
+import { LanguageToggle } from './language-toggle'
 import { SiteNavigationLink } from './site-navigation-link'
+import { ThemeToggle } from './theme-toggle'
 
 function NavigationLinks(): ReactElement {
   return (
@@ -27,20 +29,22 @@ export function SiteHeader(): ReactElement {
           </span>
         </Link>
 
-        <nav aria-label="主导航" className="hidden items-center gap-1 xl:flex">
+        <nav aria-label="主导航" className="hidden items-center gap-1 min-[900px]:flex">
           <NavigationLinks />
         </nav>
 
-        <div className="hidden items-center gap-3 xl:flex">
+        <div className="hidden items-center gap-3 min-[900px]:flex">
           <Link className="button-secondary" href="/professionals">
             专业用户加入
           </Link>
           <Link className="button-primary" href="/join">
             申请生态共建
           </Link>
+          <ThemeToggle />
+          <LanguageToggle />
         </div>
 
-        <details className="mobile-menu xl:hidden">
+        <details className="mobile-menu min-[900px]:hidden">
           <summary aria-label="打开网站导航" className="mobile-menu__trigger">
             <span aria-hidden="true">菜单</span>
           </summary>
@@ -55,6 +59,10 @@ export function SiteHeader(): ReactElement {
               <Link className="button-primary justify-center" href="/join">
                 申请生态共建
               </Link>
+            </div>
+            <div className="mt-4 flex justify-center gap-3 border-t border-[var(--alliance-border)] pt-4">
+              <ThemeToggle />
+              <LanguageToggle />
             </div>
           </div>
         </details>

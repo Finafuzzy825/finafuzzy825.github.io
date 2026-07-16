@@ -72,7 +72,7 @@ describe('working groups page', () => {
     render(<WorkingGroupsPage />)
 
     expect(screen.getByRole('heading', { level: 1, name: '工作组与专项' })).toBeTruthy()
-    expect(screen.getByRole('heading', { level: 2, name: '网络安全生态' })).toBeTruthy()
+    expect(screen.getByRole('heading', { level: 3, name: '网络安全生态' })).toBeTruthy()
     expect(screen.getByRole('link', { name: /查看网络安全生态/ }).getAttribute('href')).toBe(
       '/cybersecurity',
     )

@@ -1,0 +1,121 @@
+import type { Metadata } from 'next'
+import type { ReactElement } from 'react'
+
+import { ExternalApplicationLink } from '@/components/site/external-application-link'
+import { PageHero } from '@/components/site/page-hero'
+import { SectionHeading } from '@/components/site/section-heading'
+
+const PAGE_DESCRIPTION =
+  '了解机构参与联盟生态共建的合作价值、参与方式、协作流程与常见问题。'
+
+const VALUES = [
+  ['产业连接', '连接基础模型厂商、科研机构、产业伙伴与真实应用场景，促进跨领域协作。'],
+  ['联合创新', '围绕明确议题组织交流、研究、验证与成果传播，汇聚互补能力。'],
+  ['生态共创', '在开放、厂商中立与合规治理的边界内，共建可持续的产业生态。'],
+] as const
+
+const PARTICIPATION_PATHS = [
+  ['专项共建', '结合机构能力参与工作组、重点专项及专题活动。'],
+  ['场景协作', '在完成必要授权和边界确认后，共同定义需求、验证方案与总结经验。'],
+  ['研究与传播', '参与产业研究、标准研讨、公开活动及经确认的成果传播。'],
+] as const
+
+const PROCESS = [
+  ['提交合作意向', '通过机构飞书表单介绍机构情况、关注方向与可参与的合作方式。'],
+  ['沟通与匹配', '联盟根据公开方向与协作条件，与机构进一步确认适合的参与路径。'],
+  ['启动协作', '双方明确目标、职责、授权及合规边界后，按约定开展共建。'],
+] as const
+
+const FAQ = [
+  ['哪些机构可以参与？', '欢迎基础模型厂商、产业企业、高校、科研机构及相关生态伙伴表达合作意向。'],
+  ['提交意向是否代表正式加入？', '不代表。表单用于建立联系，具体合作安排以双方后续确认的信息为准。'],
+  ['申请通道暂不可用怎么办？', '页面会显示联系提示；正式联系信息将在官网发布前补充。'],
+] as const
+
+export const metadata: Metadata = {
+  alternates: { canonical: '/join' },
+  description: PAGE_DESCRIPTION,
+  title: '机构生态共建',
+}
+
+export default function JoinPage(): ReactElement {
+  return (
+    <main id="main-content">
+      <PageHero
+        actions={
+          <ExternalApplicationLink className="button-primary" kind="institution">
+            申请生态共建
+          </ExternalApplicationLink>
+        }
+        description={PAGE_DESCRIPTION}
+        eyebrow="INSTITUTIONAL PARTNERSHIP"
+        title="机构生态共建"
+      />
+
+      <section className="site-container py-16 sm:py-20 lg:py-24">
+        <SectionHeading
+          description="让机构能力与产业议题、真实场景和生态伙伴形成长期连接。"
+          eyebrow="WHY PARTICIPATE"
+          title="共建价值"
+        />
+        <div className="mt-10 grid gap-5 md:grid-cols-3">
+          {VALUES.map(([title, description]) => (
+            <article className="surface-card p-6 sm:p-7" key={title}>
+              <h3 className="text-xl font-semibold text-[var(--alliance-text-title)]">{title}</h3>
+              <p className="mt-4 leading-7 text-[var(--alliance-text-secondary)]">{description}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="bg-[var(--alliance-bg-subtle)]">
+        <div className="site-container py-16 sm:py-20 lg:py-24">
+          <SectionHeading
+            description="可根据机构定位、专业能力与资源条件选择合适的协作切入点。"
+            eyebrow="WAYS TO CONTRIBUTE"
+            title="参与方式"
+          />
+          <div className="mt-10 grid gap-5 md:grid-cols-3">
+            {PARTICIPATION_PATHS.map(([title, description]) => (
+              <article className="surface-card p-6" key={title}>
+                <h3 className="text-xl font-semibold text-[var(--alliance-text-title)]">{title}</h3>
+                <p className="mt-3 leading-7 text-[var(--alliance-text-secondary)]">{description}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="site-container py-16 sm:py-20 lg:py-24">
+        <SectionHeading
+          description="申请入口承接合作意向，后续协作以双方确认的目标与边界为准。"
+          eyebrow="COLLABORATION PROCESS"
+          title="参与流程"
+        />
+        <ol className="mt-10 grid gap-5 md:grid-cols-3">
+          {PROCESS.map(([title, description], index) => (
+            <li className="surface-card p-6" key={title}>
+              <p className="eyebrow">STEP {String(index + 1).padStart(2, '0')}</p>
+              <h3 className="mt-3 text-xl font-semibold text-[var(--alliance-text-title)]">{title}</h3>
+              <p className="mt-3 leading-7 text-[var(--alliance-text-secondary)]">{description}</p>
+            </li>
+          ))}
+        </ol>
+      </section>
+
+      <section className="border-t border-[var(--alliance-border)] bg-[var(--alliance-bg-surface)]">
+        <div className="site-container py-16 sm:py-20">
+          <SectionHeading eyebrow="FAQ" title="常见问题" />
+          <dl className="mt-10 grid gap-5 md:grid-cols-3">
+            {FAQ.map(([question, answer]) => (
+              <div className="surface-card p-6" key={question}>
+                <dt className="font-semibold text-[var(--alliance-text-title)]">{question}</dt>
+                <dd className="mt-3 leading-7 text-[var(--alliance-text-secondary)]">{answer}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+      </section>
+    </main>
+  )
+}

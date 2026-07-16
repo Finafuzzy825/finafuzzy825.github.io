@@ -6,12 +6,13 @@
 
 ## 首期范围
 
-- 联盟介绍
-- 加入联盟申请
-- 工作组介绍
-- 工作组成员列表
-- 加入工作组申请
-- 新闻板块
+- 联盟介绍与工作组/重点专项
+- 厂商中立的网络安全生态专题
+- 机构生态共建与专业用户双申请路径
+- 成员伙伴与新闻动态
+- 隐私说明、基础 SEO、sitemap 与 robots
+
+一期公开内容来自仓库内的类型化配置，不依赖 Payload 数据库。Payload CMS、PostgreSQL、管理后台与 API 基础仍然保留，供后续能力演进使用。
 
 ## 技术栈
 
@@ -53,6 +54,31 @@ pnpm test:e2e        # Playwright 端到端测试，需要本机 zgcllm_test 数
 pnpm generate:types  # 根据 Payload 配置生成类型
 ```
 
+Playwright 默认在隔离的 `127.0.0.1:3100` 启动测试站点，避免误复用开发中的 3000 端口。可通过 `E2E_PORT` 或 `E2E_BASE_URL` 覆盖。
+
+## 内容与申请入口维护
+
+- 站点名称、导航、公开路由和申请目标：`src/config/site.ts`
+- 首页、联盟、专项、成员和新闻内容：`src/content/`
+- 页面实现：`src/app/(frontend)/`
+- 全局视觉 Token 与响应式规则：`src/app/(frontend)/styles.css`
+
+两类飞书表单链接通过环境变量独立配置：
+
+```bash
+NEXT_PUBLIC_INSTITUTION_APPLICATION_URL=https://example.feishu.cn/share/base/form/...
+NEXT_PUBLIC_PROFESSIONAL_APPLICATION_URL=https://example.feishu.cn/share/base/form/...
+```
+
+仅接受 HTTPS 地址。未配置或地址非法时，页面会显示不可点击状态和联系回退，不会产生死链。申请数据由飞书表单及飞书多维表格承接，官网不接收或保存申请数据。
+
+## 公开路由
+
+- `/`、`/alliance`、`/working-groups`
+- `/cybersecurity`、`/members`、`/news`、`/news/[slug]`
+- `/join`、`/professionals`、`/privacy`
+- `/sitemap.xml`、`/robots.txt`
+
 ## 项目结构
 
 ```text
@@ -78,6 +104,8 @@ tests/
 - `www.zgcllm.org.cn` 指向正式服务，其他注册域名配置 HTTPS 301 跳转；
 - ICP 备案、HTTPS 证书、WAF、备份与日志脱敏；
 - 申请表隐私告知、明确同意、附件权限和数据保留策略；
+- 正式联盟 Logo、成员名单、新闻材料及公开授权确认；
+- 两份飞书表单 URL、联系人、ICP备案号和合规文案；
 - 生产密钥和数据库凭据通过部署平台注入，不写入仓库。
 
 测试种子脚本只接受 `test.env` 中显式配置的本机 `_test` 数据库，拒绝连接其他数据库。

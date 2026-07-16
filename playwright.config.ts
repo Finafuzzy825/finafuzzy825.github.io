@@ -11,6 +11,9 @@ if (process.env.TEST_DATABASE_URL) {
   process.env.DATABASE_URL = process.env.TEST_DATABASE_URL
 }
 
+const e2ePort = Number(process.env.E2E_PORT ?? '3100')
+const e2eBaseURL = process.env.E2E_BASE_URL ?? `http://127.0.0.1:${e2ePort}`
+
 /**
  * See https://playwright.dev/docs/test-configuration.
  */
@@ -26,7 +29,7 @@ export default defineConfig({
   reporter: 'html',
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
-    baseURL: 'http://localhost:3000',
+    baseURL: e2eBaseURL,
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
@@ -38,8 +41,9 @@ export default defineConfig({
     },
   ],
   webServer: {
-    command: 'pnpm dev',
-    reuseExistingServer: true,
-    url: 'http://localhost:3000',
+    command: `pnpm dev --hostname 127.0.0.1 --port ${e2ePort}`,
+    reuseExistingServer: false,
+    timeout: 120_000,
+    url: e2eBaseURL,
   },
 })

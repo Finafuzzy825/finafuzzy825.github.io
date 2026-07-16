@@ -15,16 +15,18 @@ export interface LoginOptions {
  */
 export async function login({
   page,
-  serverURL = 'http://localhost:3000',
+  serverURL = '',
   user,
 }: LoginOptions): Promise<void> {
-  await page.goto(`${serverURL}/admin/login`)
+  const baseURL = serverURL.replace(/\/$/, '')
+
+  await page.goto(`${baseURL}/admin/login`)
 
   await page.fill('#field-email', user.email)
   await page.fill('#field-password', user.password)
   await page.click('button[type="submit"]')
 
-  await page.waitForURL(`${serverURL}/admin`)
+  await page.waitForURL((url) => url.pathname === '/admin')
 
   const dashboardArtifact = page.locator('span[title="Dashboard"]')
   await expect(dashboardArtifact).toBeVisible()

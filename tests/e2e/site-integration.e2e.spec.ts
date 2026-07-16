@@ -37,14 +37,14 @@ test.describe('site integration', () => {
     expect(hasHorizontalOverflow).toBe(false)
   })
 
-  test('navigation remains available at the 1024px breakpoint', async ({ page }) => {
+  test('desktop navigation is available at the 1024px breakpoint', async ({ page }) => {
+    // v2 断点为 900px：≥900px 显示桌面主导航，移动菜单收起。
     await page.setViewportSize({ width: 1024, height: 768 })
     await page.goto('/')
 
-    const menu = page.locator('header details.mobile-menu')
-    await expect(menu.locator('summary')).toBeVisible()
-    await menu.locator('summary').click()
-    await expect(page.getByRole('navigation', { name: '移动导航' })).toBeVisible()
+    const desktopNav = page.getByRole('navigation', { name: '主导航' })
+    await expect(desktopNav.getByRole('link', { name: '网络安全生态' })).toBeVisible()
+    await expect(page.locator('header details.mobile-menu summary')).toBeHidden()
   })
 
   test('primary journey reaches the ecosystem and application pages', async ({ page }) => {

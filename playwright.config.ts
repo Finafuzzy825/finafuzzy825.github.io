@@ -1,6 +1,8 @@
 import { defineConfig, devices } from '@playwright/test'
 import { config } from 'dotenv'
 
+import { resolveE2EBaseURL, resolveE2EPort } from './tests/helpers/e2eConfig'
+
 /**
  * Read environment variables from file.
  * https://github.com/motdotla/dotenv
@@ -10,6 +12,11 @@ config({ path: 'test.env', override: true })
 if (process.env.TEST_DATABASE_URL) {
   process.env.DATABASE_URL = process.env.TEST_DATABASE_URL
 }
+
+const remoteBaseURL = resolveE2EBaseURL(process.env.E2E_BASE_URL)
+const e2ePort = resolveE2EPort(remoteBaseURL ? undefined : process.env.E2E_PORT)
+const localBaseURL = `http://127.0.0.1:${e2ePort}`
+const e2eBaseURL = remoteBaseURL ?? localBaseURL
 
 /**
  * See https://playwright.dev/docs/test-configuration.
@@ -26,7 +33,7 @@ export default defineConfig({
   reporter: 'html',
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
-    baseURL: 'http://localhost:3000',
+    baseURL: e2eBaseURL,
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
@@ -37,9 +44,12 @@ export default defineConfig({
       use: { ...devices['Desktop Chrome'], channel: 'chromium' },
     },
   ],
-  webServer: {
-    command: 'pnpm dev',
-    reuseExistingServer: true,
-    url: 'http://localhost:3000',
-  },
+  webServer: remoteBaseURL
+    ? undefined
+    : {
+        command: `pnpm dev --hostname 127.0.0.1 --port ${e2ePort}`,
+        reuseExistingServer: false,
+        timeout: 120_000,
+        url: localBaseURL,
+      },
 })

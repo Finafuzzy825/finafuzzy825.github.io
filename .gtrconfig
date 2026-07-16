@@ -1,0 +1,14 @@
+# .gtrconfig - Git Worktree Manager 配置
+# 此文件可提交到 Git，作为团队共享的默认配置
+# 配置优先级：命令行参数 > git config --local > git config --global > .gtrconfig
+
+[worktree]
+    # worktree 存放位置（相对路径基于项目根目录）
+    # 默认值：.worktree
+    dir = .worktree
+
+[copy]
+    # 创建 worktree 时复制的文件模式（glob patterns）
+    include = .env.example
+
+    # 依赖与构建产物由各 worktree 独立生成，避免 pnpm 类型重复和开发锁冲突。

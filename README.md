@@ -88,17 +88,23 @@ docker build \
 ```text
 src/
 ├── app/
-│   └── (frontend)/  # 官网 App Router 页面与样式
+│   ├── (frontend)/  # 官网 App Router 页面、布局、样式与 sitemap
+│   └── robots.ts    # 根级 /robots.txt 生成
 ├── components/      # 站点 UI 组件
-├── config/          # 站点级配置
+├── config/          # 站点级配置（site.ts）
 ├── content/         # 类型化的公开内容
 └── types/           # 内容类型定义
 tests/
-├── unit/            # 单元测试
-└── e2e/             # 浏览器端到端测试
+├── unit/            # 单元与组件测试（Vitest）
+├── e2e/             # 浏览器端到端测试（Playwright）
+└── helpers/         # 测试辅助
 ```
 
-具体协作约定见 [CONTRIBUTING.md](./CONTRIBUTING.md)。
+`/sitemap.xml` 由 `src/app/(frontend)/sitemap.ts` 生成，`/robots.txt` 由 `src/app/robots.ts` 生成。
+
+> 注：`src/app/my-route/` 为空的脚手架残留目录，未对应任何公开路由，可安全删除。
+
+更多说明：项目总览见 [docs/overview.md](./docs/overview.md)，文档索引见 [docs/README.md](./docs/README.md)，协作约定见 [CONTRIBUTING.md](./CONTRIBUTING.md)。
 
 ## 部署说明
 

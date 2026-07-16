@@ -10,6 +10,8 @@ updated_at: 2026-07-16
 
 # SDD 上下文: alliance-website-v1
 
+> **更新补记（2026-07-16）**：本文件为 alliance-website-v1 开发期的历史设计记录。项目已在 PR #4 中移除 Payload CMS 与 PostgreSQL，收敛为纯静态官网——公开内容由 `src/content/` 驱动，加入申请通过飞书表单外链承接。以下涉及 Payload / 数据库的内容仅作历史留存，不代表当前架构。
+
 ## 当前状态
 
 - 阶段 0：已完成。功能 worktree 位于仓库内 `.worktree/codex/alliance-website-v1`。

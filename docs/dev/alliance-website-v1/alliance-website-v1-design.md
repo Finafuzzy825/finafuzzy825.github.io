@@ -8,6 +8,8 @@ version: 1
 
 # 技术设计: 中关村自主大模型产业联盟官网一期
 
+> **更新补记（2026-07-16）**：本文件为 alliance-website-v1 开发期的历史设计记录。项目已在 PR #4 中移除 Payload CMS 与 PostgreSQL，收敛为纯静态官网——公开内容由 `src/content/` 驱动，加入申请通过飞书表单外链承接。以下涉及 Payload / 数据库的内容仅作历史留存，不代表当前架构。
+
 ## 1. 设计目标
 
 在现有 Next.js 16、React 19、Tailwind CSS 4、Payload CMS 3 项目上，将初始化占位页建设为可正式发布的联盟官网一期。公开内容采用类型化本地配置，由 Server Components 渲染；Payload 与 PostgreSQL 保留，但不作为官网内容展示和飞书申请跳转的运行依赖。

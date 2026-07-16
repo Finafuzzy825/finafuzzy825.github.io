@@ -203,7 +203,7 @@ source_design: docs/dev/pages-redesign/pages-redesign-design.md
 - **injected_skills**: []
 
 ### 描述
-按 design.md §7 与原型 `docs/design/prototypes/cybersecurity.html`（最新中文文案来源）重写 `src/content/cybersecurity.ts`：保留 `cycle`/`title`/`summary`；新增 `resources`(5)/`actions`(4)/`organisation`(6，点名已授权牵头方)；调整 `contribution` badges 与 `governanceBoundaries`(3)、`openPrinciples`(4)；移除旧 `roles`/`principles`。在 `src/types/content.ts` 增补对应接口。**口径铁律**：厂商中立；仅点名智谱/清华网络与信息安全实验室/数说安全/云起无垠；受邀企业只用角色描述；不放数字/姓名/GLM 战略口径；不强制交付原始数据。同步更新受影响单测（`content.test.ts` 等）以匹配新结构（TDD）。
+按 design.md §7 与原型 `docs/design/prototypes/cybersecurity.html`（最新中文文案来源）重写 `src/content/cybersecurity.ts`：保留 `cycle`/`title`/`summary`；新增 `resources`(5)/`actions`(4)/`organisation`(6，点名已授权牵头方)；调整 `contribution` badges 与 `governanceBoundaries`(3)、`openPrinciples`(4)；移除旧 `roles`/`principles`。在 `src/types/content.ts` 增补对应接口。**口径铁律**：厂商中立；仅点名智谱/清华大学/数说安全/云起无垠；受邀企业只用角色描述；不放数字/姓名/GLM 战略口径；不强制交付原始数据。同步更新受影响单测（`content.test.ts` 等）以匹配新结构（TDD）。
 
 ### 验收标准
 - [ ] 新字段结构完整、类型定义齐备、`as const` 一致

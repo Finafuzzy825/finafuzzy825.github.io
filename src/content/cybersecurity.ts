@@ -56,7 +56,7 @@ export const CYBERSECURITY_ECOSYSTEM = {
     },
     {
       description: '指导技术方向与评测方法，推动技术规范、科研课题与人才培养，提升成果的专业性与中立性。',
-      title: '清华大学网络与信息安全实验室 · 学术指导',
+      title: '清华大学 · 学术指导',
     },
     {
       description: '共同承担产业研究、伙伴连接、用户运营、技术平台、数据任务与场景落地等日常执行。',

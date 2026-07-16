@@ -11,7 +11,7 @@ const ecosystemCycle = [
 
 const authorisedLeads = [
   '智谱',
-  '清华大学网络与信息安全实验室',
+  '清华大学',
   '数说安全',
   '云起无垠',
 ] as const

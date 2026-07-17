@@ -71,7 +71,7 @@ describe('working groups page', () => {
   it('lists only confirmed initiatives and links to cybersecurity', () => {
     render(<WorkingGroupsPage />)
 
-    expect(screen.getByRole('heading', { level: 1, name: '工作组与专项' })).toBeTruthy()
+    expect(screen.getByRole('heading', { level: 1, name: '工作组' })).toBeTruthy()
     expect(screen.getByRole('heading', { level: 3, name: '网络安全生态' })).toBeTruthy()
     expect(screen.getByRole('link', { name: /查看网络安全生态/ }).getAttribute('href')).toBe(
       '/cybersecurity',
@@ -81,8 +81,8 @@ describe('working groups page', () => {
   })
 
   it('defines page-specific metadata', () => {
-    expect(workingGroupsMetadata.title).toBe('工作组与专项')
-    expect(workingGroupsMetadata.description).toMatch(/工作组|重点专项/)
+    expect(workingGroupsMetadata.title).toBe('工作组')
+    expect(workingGroupsMetadata.description).toMatch(/工作组/)
     expect(workingGroupsMetadata.alternates).toEqual({ canonical: '/working-groups' })
   })
 })

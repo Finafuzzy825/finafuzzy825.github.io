@@ -31,7 +31,7 @@ export const SITE_URL = resolveSiteUrl(process.env.NEXT_PUBLIC_SITE_URL)
 
 export const SITE_NAVIGATION: readonly NavigationItem[] = [
   { href: '/alliance', label: '联盟介绍' },
-  { href: '/working-groups', label: '工作组与专项' },
+  { href: '/working-groups', label: '工作组' },
   { href: '/cybersecurity', label: '网络安全生态' },
   { href: '/members', label: '成员伙伴' },
   { href: '/news', label: '新闻动态' },

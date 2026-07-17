@@ -86,9 +86,13 @@ export function WorkingGroupOverview({ group }: WorkingGroupOverviewProps): Reac
           />
           <div className="grid-2">
             {group.leads.map((lead) => (
-              <article className="card" key={lead.name}>
+              <article className="card" key={`${lead.role}-${lead.name}`}>
                 <p className="eyebrow">{lead.role}</p>
-                <h3 style={{ fontSize: '20px' }}>{lead.name}</h3>
+                {lead.named ? (
+                  <h3 style={{ fontSize: '20px' }}>{lead.name}</h3>
+                ) : (
+                  <p>{lead.name}</p>
+                )}
               </article>
             ))}
           </div>

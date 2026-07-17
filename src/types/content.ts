@@ -73,6 +73,10 @@ export type ContentBlock =
 export interface NewsEntry {
   body: readonly ContentBlock[]
   category: NewsCategory
+  /** 可选外部行动入口链接（如飞书申请表），须为 https */
+  ctaHref?: string
+  /** 外部行动入口按钮文案，与 ctaHref 成对出现 */
+  ctaLabel?: string
   date: string
   description: string
   featured?: boolean

@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation'
 import type { ReactElement } from 'react'
 
 import { PageHero } from '@/components/site/page-hero'
+import { isSafeExternalUrl } from '@/config/site'
 import { getPublishedNews, getPublishedNewsBySlug, NEWS_ENTRIES } from '@/content/news'
 import type { ContentBlock, NewsEntry } from '@/types/content'
 
@@ -82,6 +83,18 @@ export function NewsArticle({ entry }: NewsArticleProps): ReactElement {
             {entry.body.map((block, index) => (
               <ContentBlockView block={block} key={`${block.type}-${index}`} />
             ))}
+            {entry.ctaHref && entry.ctaLabel && isSafeExternalUrl(entry.ctaHref) ? (
+              <p className="cta">
+                <a
+                  className="btn btn--primary"
+                  href={entry.ctaHref}
+                  rel="noreferrer noopener"
+                  target="_blank"
+                >
+                  {entry.ctaLabel}
+                </a>
+              </p>
+            ) : null}
             <div className="back">
               <Link className="btn btn--ghost" href="/news">
                 ← 返回新闻中心

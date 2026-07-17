@@ -148,6 +148,33 @@ describe('news detail page', () => {
     expect(container.querySelector('script')).toBeNull()
   })
 
+  it('test_news_article_renders_https_cta_as_safe_external_link', () => {
+    render(
+      <NewsArticle
+        entry={{
+          ...publishedEntry,
+          ctaHref: 'https://example.feishu.cn/share/base/form/abc',
+          ctaLabel: '填写申请',
+        }}
+      />,
+    )
+
+    const cta = screen.getByRole('link', { name: '填写申请' })
+    expect(cta.getAttribute('href')).toBe('https://example.feishu.cn/share/base/form/abc')
+    expect(cta.getAttribute('target')).toBe('_blank')
+    expect(cta.getAttribute('rel')).toBe('noreferrer noopener')
+  })
+
+  it('test_news_article_drops_non_https_cta', () => {
+    render(
+      <NewsArticle
+        entry={{ ...publishedEntry, ctaHref: 'http://insecure.example/form', ctaLabel: '填写申请' }}
+      />,
+    )
+
+    expect(screen.queryByRole('link', { name: '填写申请' })).toBeNull()
+  })
+
   it('test_news_static_params_mixed_entries_includes_only_published_slugs', () => {
     expect(createNewsStaticParams([draftEntry, publishedEntry])).toEqual([
       { slug: 'confirmed-update' },

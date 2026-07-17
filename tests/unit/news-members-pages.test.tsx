@@ -19,6 +19,7 @@ import NewsArticlePage, {
   NewsArticle,
 } from '@/app/(frontend)/news/[slug]/page'
 import NewsPage, { metadata as newsMetadata, NewsList } from '@/app/(frontend)/news/page'
+import { NEWS_ENTRIES } from '@/content/news'
 
 afterEach(cleanup)
 
@@ -173,6 +174,31 @@ describe('news detail page', () => {
     )
 
     expect(screen.queryByRole('link', { name: '填写申请' })).toBeNull()
+  })
+
+  it.each([
+    { case: 'ctaHref only, no label', cta: { ctaHref: 'https://example.feishu.cn/form' } },
+    { case: 'ctaLabel only, no href', cta: { ctaLabel: '填写申请' } },
+    { case: 'empty href', cta: { ctaHref: '', ctaLabel: '填写申请' } },
+    { case: 'empty label', cta: { ctaHref: 'https://example.feishu.cn/form', ctaLabel: '' } },
+    { case: 'malformed href', cta: { ctaHref: 'not-a-url', ctaLabel: '填写申请' } },
+  ])('test_news_article_renders_no_cta_when_config_incomplete: $case', ({ cta }) => {
+    render(<NewsArticle entry={{ ...publishedEntry, ...cta }} />)
+
+    expect(screen.queryByRole('link', { name: '填写申请' })).toBeNull()
+  })
+
+  it('test_news_article_open_program_entry_renders_feishu_cta', () => {
+    const entry = NEWS_ENTRIES.find((item) => item.slug === 'cybersecurity-open-program')
+    expect(entry).toBeDefined()
+
+    render(<NewsArticle entry={entry!} />)
+
+    const cta = screen.getByRole('link', { name: entry!.ctaLabel! })
+    expect(cta.getAttribute('href')).toBe(entry!.ctaHref)
+    expect(cta.getAttribute('href')?.startsWith('https://')).toBe(true)
+    expect(cta.getAttribute('target')).toBe('_blank')
+    expect(cta.getAttribute('rel')).toBe('noreferrer noopener')
   })
 
   it('test_news_static_params_mixed_entries_includes_only_published_slugs', () => {

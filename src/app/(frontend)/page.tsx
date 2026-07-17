@@ -1,128 +1,199 @@
+import type { Metadata } from 'next'
 import Link from 'next/link'
 import type { ReactElement } from 'react'
 
-import { CORE_MODULES, SITE_NAME } from '@/config/site'
+import { SectionHeading } from '@/components/site/section-heading'
+import { HOME_ACTION_SLOGANS, HOME_DIRECTIONS, HOME_VALUE_PROPOSITIONS } from '@/content/home'
+import { MEMBERS } from '@/content/members'
+import { getPublishedNews } from '@/content/news'
+import { SITE_NAME } from '@/config/site'
+
+export const metadata: Metadata = {
+  alternates: { canonical: '/' },
+  description: '汇聚自主大模型力量，共建开放、安全、协同的产业生态，推动技术创新、产业协同、场景落地与国际合作。',
+  title: { absolute: `首页｜${SITE_NAME}` },
+}
 
 export default function HomePage(): ReactElement {
+  const publishedNews = getPublishedNews()
+
   return (
-    <div className="min-h-screen bg-slate-950 text-white">
-      <header className="border-b border-white/10">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5 lg:px-8">
-          <Link className="flex items-center gap-3" href="/">
-            <span
-              aria-hidden="true"
-              className="grid size-10 place-items-center rounded-xl bg-cyan-400 font-semibold text-slate-950"
-            >
-              Z
-            </span>
-            <span className="max-w-64 text-sm font-semibold tracking-wide sm:text-base">
-              {SITE_NAME}
-            </span>
-          </Link>
-          <nav
-            aria-label="主导航"
-            className="hidden items-center gap-8 text-sm text-slate-300 md:flex"
-          >
-            <a className="transition hover:text-white" href="#about">
-              联盟介绍
-            </a>
-            <a className="transition hover:text-white" href="#modules">
-              网站模块
-            </a>
-            <Link
-              className="rounded-full border border-white/20 px-4 py-2 transition hover:border-cyan-300 hover:text-cyan-200"
-              href="/admin"
-            >
-              管理后台
-            </Link>
-          </nav>
-        </div>
-      </header>
-
-      <main>
-        <section className="relative isolate overflow-hidden">
-          <div
-            aria-hidden="true"
-            className="absolute inset-x-0 top-0 -z-10 h-96 bg-[radial-gradient(circle_at_top_right,rgba(34,211,238,0.18),transparent_55%)]"
-          />
-          <div className="mx-auto grid max-w-7xl gap-14 px-6 py-24 lg:grid-cols-[1.2fr_0.8fr] lg:px-8 lg:py-36">
-            <div>
-              <p className="mb-6 text-sm font-medium tracking-[0.24em] text-cyan-300">
-                ZGCLLM · OFFICIAL WEBSITE
-              </p>
-              <h1 className="max-w-4xl text-4xl font-semibold tracking-tight text-balance sm:text-6xl lg:text-7xl">
-                汇聚自主大模型力量，连接产业创新生态
-              </h1>
-              <p className="mt-8 max-w-2xl text-lg leading-8 text-slate-300">
-                {SITE_NAME}
-                官方网站项目已完成基础初始化，将承载联盟展示、工作组协作、成员服务、入盟申请与新闻发布。
-              </p>
-              <div className="mt-10 flex flex-wrap gap-4">
-                <a
-                  className="rounded-full bg-cyan-400 px-6 py-3 text-sm font-semibold text-slate-950 transition hover:bg-cyan-300"
-                  href="#modules"
-                >
-                  查看建设范围
-                </a>
-                <Link
-                  className="rounded-full border border-white/20 px-6 py-3 text-sm font-semibold transition hover:border-white/50"
-                  href="/admin"
-                >
-                  进入内容后台
-                </Link>
-              </div>
-            </div>
-
-            <div className="grid content-center gap-4 sm:grid-cols-2 lg:grid-cols-1">
-              <div className="rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur">
-                <p className="text-sm text-slate-400">正式主域名</p>
-                <p className="mt-2 text-xl font-medium text-cyan-200">www.zgcllm.org.cn</p>
-              </div>
-              <div className="rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur">
-                <p className="text-sm text-slate-400">品牌保护域名</p>
-                <p className="mt-2 text-base font-medium">zgcllm.cn · zgcllm.net</p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section className="border-y border-white/10 bg-white/[0.03]" id="about">
-          <div className="mx-auto max-w-7xl px-6 py-16 lg:px-8">
-            <p className="max-w-4xl text-2xl leading-10 text-slate-200 sm:text-3xl">
-              项目采用 Next.js、Payload CMS 与
-              PostgreSQL，一套代码同时支持高性能官网、内容管理后台和后续申请审核流程。
+    <main id="main-content">
+      <section className="hero page-hero">
+        <div className="container hero__inner">
+          <div>
+            <p className="eyebrow">{SITE_NAME}</p>
+            <h1>汇聚自主大模型力量，共建开放、安全、协同的产业生态</h1>
+            <p className="hero__lead">
+              中关村自主大模型产业联盟汇聚高校、科研机构与产业伙伴，围绕自主大模型推动技术创新、产业协同、场景落地与国际合作，构建开放的产业生态，并持续强化安全大模型、可信智能体与人工智能安全治理能力。
             </p>
+            <div className="hero__cta">
+              <Link className="btn btn--primary" href="/join">
+                机构合作申请
+              </Link>
+            </div>
           </div>
-        </section>
 
-        <section className="mx-auto max-w-7xl px-6 py-24 lg:px-8" id="modules">
-          <div className="mb-12 max-w-2xl">
-            <p className="text-sm font-medium tracking-[0.2em] text-cyan-300">CORE MODULES</p>
-            <h2 className="mt-4 text-3xl font-semibold tracking-tight sm:text-4xl">
-              首期六个核心模块
-            </h2>
+          <div className="hero__cards">
+            <div className="glass">
+              <p className="glass__k">联盟定位</p>
+              <p className="glass__v">连接模型、芯片、算力、数据、平台及行业应用的自主大模型产业生态平台</p>
+            </div>
+            <div className="glass">
+              <p className="glass__k">核心议题</p>
+              <p className="glass__v">技术创新、产业协同、场景落地与安全可信能力建设</p>
+            </div>
           </div>
-          <div className="grid gap-px overflow-hidden rounded-3xl border border-white/10 bg-white/10 sm:grid-cols-2 lg:grid-cols-3">
-            {CORE_MODULES.map((module, index) => (
-              <article className="bg-slate-950 p-7" key={module.slug}>
-                <p className="text-sm font-medium text-cyan-300">0{index + 1}</p>
-                <h3 className="mt-8 text-xl font-semibold">{module.title}</h3>
-                <p className="mt-3 leading-7 text-slate-400">{module.description}</p>
-                <code className="mt-6 block text-xs text-slate-500">{module.path}</code>
+        </div>
+      </section>
+
+      <section className="block">
+        <div className="container">
+          <SectionHeading
+            description="以自主创新、开放协作、安全可信和产业共建为原则，连接产业各方力量。"
+            eyebrow="联盟价值"
+            title="开放、安全、协同的产业生态"
+          />
+          <div className="grid-3">
+            {HOME_VALUE_PROPOSITIONS.map((item, index) => (
+              <article className="card" key={item.id}>
+                <p className="card__num">0{index + 1}</p>
+                <h3>{item.title}</h3>
+                <p>{item.description}</p>
               </article>
             ))}
           </div>
-        </section>
-      </main>
-
-      <footer className="border-t border-white/10">
-        <div className="mx-auto flex max-w-7xl flex-col gap-3 px-6 py-8 text-sm text-slate-400 sm:flex-row sm:items-center sm:justify-between lg:px-8">
-          <p>
-            © {new Date().getFullYear()} {SITE_NAME}
-          </p>
-          <p>项目初始化版本 · 内容与功能持续建设中</p>
         </div>
-      </footer>
-    </div>
+      </section>
+
+      <section className="block block--subtle">
+        <div className="container split">
+          <SectionHeading
+            description="围绕自主大模型的核心技术、产业协同、场景数据、评测、安全与国际化持续推进。"
+            eyebrow="重点方向"
+            title="六项重点工作"
+          />
+          <div className="dir-list">
+            {HOME_DIRECTIONS.map((direction, index) => (
+              <div className="dir-item" key={direction}>
+                <span className="n">{index + 1}</span>
+                <b>{direction}</b>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="block">
+        <div className="container">
+          <SectionHeading
+            description="以清晰的行动路径推动联盟从能力建设走向产业价值。"
+            eyebrow="行动口号"
+            title="从能力到生态的持续跃迁"
+          />
+          <div className="grid-4">
+            {HOME_ACTION_SLOGANS.map((slogan) => (
+              <article className="card" key={slogan}>
+                <b>{slogan}</b>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="block">
+        <div className="container">
+          <div className="cta-band">
+            <div>
+              <p className="eyebrow">安全工作组</p>
+              <h2>网络安全生态</h2>
+              <p>
+                联盟下设网络安全工作组，聚焦安全大模型与网络安全智能体，连接专业用户、真实场景、深度任务与能力验证，依托工作组持续推进重点项目落地。
+              </p>
+            </div>
+            <Link className="btn btn--primary" href="/cybersecurity">
+              了解网络安全生态
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      <section className="block block--subtle">
+        <div className="container">
+          <SectionHeading
+            action={
+              <Link className="text-link" href="/members">
+                查看成员伙伴
+              </Link>
+            }
+            description="仅展示已经确认公开授权的成员信息，不使用示例名称或标识代替。"
+            eyebrow="生态伙伴"
+            title="连接多元产业力量"
+          />
+          {MEMBERS.length > 0 ? (
+            <div className="grid-4">
+              {MEMBERS.slice(0, 4).map((member) => (
+                <article className="card" key={member.id}>
+                  <h3>{member.name}</h3>
+                  {member.description ? <p>{member.description}</p> : null}
+                </article>
+              ))}
+            </div>
+          ) : (
+            <div className="empty">
+              <h3>成员信息整理中</h3>
+              <p>联盟将在完成公开授权确认后发布成员信息。</p>
+            </div>
+          )}
+        </div>
+      </section>
+
+      <section className="block">
+        <div className="container">
+          <SectionHeading
+            action={
+              <Link className="text-link" href="/news">
+                查看新闻动态
+              </Link>
+            }
+            description="发布联盟动态、活动通知、行业观察与经确认的阶段成果。"
+            eyebrow="最新动态"
+            title="关注联盟进展"
+          />
+          {publishedNews.length > 0 ? (
+            <div className="grid-3 news">
+              {publishedNews.slice(0, 3).map((entry) => (
+                <article className="card" key={entry.slug}>
+                  <div className="news__meta">
+                    <span className="news__date">{entry.date}</span>
+                  </div>
+                  <h3>
+                    <Link href={`/news/${entry.slug}`}>{entry.title}</Link>
+                  </h3>
+                  <p>{entry.description}</p>
+                </article>
+              ))}
+            </div>
+          ) : (
+            <div className="empty">
+              <h3>最新动态即将发布</h3>
+              <p>经联盟确认的新闻、活动与成果将在这里持续更新。</p>
+            </div>
+          )}
+        </div>
+      </section>
+
+      <section className="container">
+        <div className="end-cta">
+          <div>
+            <h2>共建自主大模型产业生态</h2>
+            <p>了解联盟参与方式，携手机构伙伴推动自主大模型产业生态共建。</p>
+          </div>
+          <Link className="btn btn--primary" href="/join">
+            了解生态共建
+          </Link>
+        </div>
+      </section>
+    </main>
   )
 }

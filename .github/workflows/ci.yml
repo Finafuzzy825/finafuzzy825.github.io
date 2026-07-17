@@ -22,6 +22,8 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
+        with:
+          persist-credentials: false
       - name: Set up pnpm
         uses: pnpm/action-setup@v4
         with:
@@ -33,29 +35,13 @@ jobs:
     name: Build and test
     runs-on: ubuntu-latest
     timeout-minutes: 15
-    services:
-      postgres:
-        image: postgres:16-alpine
-        env:
-          POSTGRES_DB: zgcllm_test
-          POSTGRES_PASSWORD: postgres
-          POSTGRES_USER: postgres
-        ports:
-          - 5432:5432
-        options: >-
-          --health-cmd "pg_isready -U postgres -d zgcllm_test"
-          --health-interval 5s
-          --health-timeout 5s
-          --health-retries 10
     env:
-      DATABASE_URL: postgres://postgres:postgres@127.0.0.1:5432/zgcllm_test
       NEXT_PUBLIC_SITE_URL: https://www.zgcllm.org.cn
-      PAYLOAD_SECRET: ci-only-secret-that-is-not-used-in-production
-      PAYLOAD_TEST_MODE: 'true'
-      TEST_DATABASE_URL: postgres://postgres:postgres@127.0.0.1:5432/zgcllm_test
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
+        with:
+          persist-credentials: false
       - name: Set up pnpm
         uses: pnpm/action-setup@v4
         with:
@@ -67,24 +53,21 @@ jobs:
           node-version: 22
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
-      - name: Generate Payload types
-        run: pnpm generate:types
-      - name: Verify generated types are committed
-        run: git diff --exit-code -- src/payload-types.ts
       - name: Check types
         run: pnpm typecheck
       - name: Lint
         run: pnpm lint
       - name: Run unit tests
         run: pnpm test
-      - name: Run integration tests
-        run: pnpm test:int
       - name: Install Playwright Chromium
         run: pnpm exec playwright install --with-deps chromium
       - name: Run end-to-end tests
         run: pnpm test:e2e
       - name: Upload Playwright report
-        if: ${{ !cancelled() }}
+        # 仅在测试失败时上传报告（此时才有诊断价值），避免绿色构建每次占用 artifact 配额；
+        # continue-on-error 确保配额/上传问题本身不会拖垮整个 job。
+        if: failure()
+        continue-on-error: true
         uses: actions/upload-artifact@v4
         with:
           name: playwright-report

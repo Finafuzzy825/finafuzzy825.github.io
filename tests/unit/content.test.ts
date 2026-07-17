@@ -1,6 +1,10 @@
 import { CYBERSECURITY_ECOSYSTEM } from '@/content/cybersecurity'
 import { getPublishedNews, NEWS_ENTRIES } from '@/content/news'
-import { WORKING_GROUPS } from '@/content/working-groups'
+import {
+  getWorkingGroupBySlug,
+  getWorkingGroupSlugs,
+  WORKING_GROUPS,
+} from '@/content/working-groups'
 import { describe, expect, it } from 'vitest'
 
 describe('public website content', () => {
@@ -55,8 +59,31 @@ describe('public website content', () => {
 
   it('links the cybersecurity initiative from the working group catalog', () => {
     expect(WORKING_GROUPS).toContainEqual(
-      expect.objectContaining({ href: '/cybersecurity', id: 'cybersecurity-ecosystem' }),
+      expect.objectContaining({
+        ecosystemHref: '/cybersecurity',
+        id: 'cybersecurity',
+        slug: 'cybersecurity',
+      }),
     )
+  })
+
+  it('exposes working group lookup helpers without fabricating leads or outcomes', () => {
+    expect(getWorkingGroupSlugs()).toEqual(['cybersecurity'])
+
+    const group = getWorkingGroupBySlug('cybersecurity')
+    expect(group).toBeDefined()
+    expect(group?.title).toBe('网络安全工作组')
+    expect(group?.responsibilities.length).toBeGreaterThan(0)
+    expect(group?.researchDirections.length).toBeGreaterThan(0)
+
+    const authorisedLeads = ['联盟', '智谱', '清华', '数说安全', '云起无垠']
+    for (const lead of authorisedLeads) {
+      expect(group?.leads.some(({ name, named }) => named && name.includes(lead))).toBe(true)
+    }
+    const unnamedLead = group?.leads.find(({ named }) => !named)
+    expect(unnamedLead?.role).toBe('生态伙伴')
+
+    expect(getWorkingGroupBySlug('unknown-slug')).toBeUndefined()
   })
 
   it('publishes only explicitly published news with unique slugs', () => {

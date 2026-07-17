@@ -17,7 +17,7 @@ const AUDIENCES = [
 const WAYS = [
   ['参与议题与活动', '关注公开活动与专题议题，结合专业背景参与交流和研讨。'],
   ['贡献专业反馈', '在明确授权和安全边界内，为任务定义、方案验证与结果反馈提供专业意见。'],
-  ['连接协作机会', '通过联盟公开渠道了解适合个人参与的专项、研究与生态活动。'],
+  ['连接协作机会', '通过联盟公开渠道了解适合个人参与的项目、研究与生态活动。'],
 ] as const
 
 const BENEFITS = [
@@ -38,11 +38,11 @@ export default function ProfessionalsPage(): ReactElement {
       <PageHero
         actions={
           <ExternalApplicationLink className="button-primary" kind="professional">
-            专业用户加入
+            个人专业用户加入
           </ExternalApplicationLink>
         }
         description={PAGE_DESCRIPTION}
-        eyebrow="PROFESSIONAL COMMUNITY"
+        eyebrow="专业用户社区"
         title="专业用户加入"
       />
 
@@ -50,7 +50,7 @@ export default function ProfessionalsPage(): ReactElement {
         <div className="site-container">
           <SectionHeading
             description="无论来自技术、研究、产业还是应用一线，都可以基于真实经验参与开放交流。"
-            eyebrow="WHO CAN JOIN"
+            eyebrow="参与对象"
             title="适用人群"
           />
           <div className="grid-3">
@@ -68,7 +68,7 @@ export default function ProfessionalsPage(): ReactElement {
         <div className="site-container">
           <SectionHeading
             description="参与内容取决于公开计划、议题需求和必要的授权边界。"
-            eyebrow="WAYS TO PARTICIPATE"
+            eyebrow="参与路径"
             title="参与方式"
           />
           <div className="grid-3">
@@ -86,7 +86,7 @@ export default function ProfessionalsPage(): ReactElement {
         <div className="site-container">
           <SectionHeading
             description="联盟提供专业连接和公开参与机会，具体安排以各项活动或专项说明为准。"
-            eyebrow="PARTICIPANT BENEFITS"
+            eyebrow="权益说明"
             title="参与权益"
           />
           <ol className="dir-list" style={{ gridTemplateColumns: '1fr' }}>

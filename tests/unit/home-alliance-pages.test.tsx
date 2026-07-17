@@ -16,12 +16,12 @@ describe('home page', () => {
     expect(
       screen.getByRole('heading', {
         level: 1,
-        name: /汇聚自主大模型产业力量/,
+        name: /汇聚自主大模型力量/,
       }),
     ).toBeTruthy()
 
-    const institutionLink = screen.getByRole('link', { name: '申请生态共建' })
-    const professionalLink = screen.getByRole('link', { name: '专业用户加入' })
+    const institutionLink = screen.getByRole('link', { name: '机构合作申请' })
+    const professionalLink = screen.getByRole('link', { name: '个人专业用户加入' })
 
     expect(institutionLink.getAttribute('href')).toBe('/join')
     expect(institutionLink.className).toContain('btn--primary')
@@ -42,7 +42,7 @@ describe('home page', () => {
 
   it('defines page-specific metadata', () => {
     expect(homeMetadata.title).toEqual({ absolute: '首页｜中关村自主大模型产业联盟' })
-    expect(homeMetadata.description).toMatch(/生态共建/)
+    expect(homeMetadata.description).toMatch(/产业生态/)
     expect(homeMetadata.alternates).toEqual({ canonical: '/' })
   })
 })
@@ -71,7 +71,7 @@ describe('working groups page', () => {
   it('lists only confirmed initiatives and links to cybersecurity', () => {
     render(<WorkingGroupsPage />)
 
-    expect(screen.getByRole('heading', { level: 1, name: '工作组与专项' })).toBeTruthy()
+    expect(screen.getByRole('heading', { level: 1, name: '工作组' })).toBeTruthy()
     expect(screen.getByRole('heading', { level: 3, name: '网络安全生态' })).toBeTruthy()
     expect(screen.getByRole('link', { name: /查看网络安全生态/ }).getAttribute('href')).toBe(
       '/cybersecurity',
@@ -81,8 +81,8 @@ describe('working groups page', () => {
   })
 
   it('defines page-specific metadata', () => {
-    expect(workingGroupsMetadata.title).toBe('工作组与专项')
-    expect(workingGroupsMetadata.description).toMatch(/工作组|重点专项/)
+    expect(workingGroupsMetadata.title).toBe('工作组')
+    expect(workingGroupsMetadata.description).toMatch(/工作组/)
     expect(workingGroupsMetadata.alternates).toEqual({ canonical: '/working-groups' })
   })
 })

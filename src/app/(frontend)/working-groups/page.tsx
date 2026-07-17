@@ -8,24 +8,24 @@ import { WORKING_GROUPS } from '@/content/working-groups'
 
 export const metadata: Metadata = {
   alternates: { canonical: '/working-groups' },
-  description: '了解联盟工作组与重点专项，查看已经确认并公开的协作方向及参与入口。',
-  title: '工作组与专项',
+  description: '了解联盟工作组，查看已经确认并公开的协作方向及参与入口。',
+  title: '工作组',
 }
 
 export default function WorkingGroupsPage(): ReactElement {
   return (
     <main id="main-content">
       <PageHero
-        description="围绕产业共同议题组织持续协作，通过工作组和重点专项连接研究、验证、场景与成果交流。"
+        description="围绕产业共同议题组织持续协作，通过工作组连接研究、验证、场景与成果交流。"
         eyebrow="协作网络"
-        title="工作组与专项"
+        title="工作组"
       />
 
       <section className="block">
         <div className="site-container">
           <SectionHeading
-            description="以下仅展示已经确认并可公开的重点专项；其余方向将在信息确认后陆续发布。"
-            eyebrow="公开专项"
+            description="以下仅展示已经确认并可公开的工作组；其余方向将在信息确认后陆续发布。"
+            eyebrow="公开工作组"
             title="聚焦真实议题，形成持续协作"
           />
 

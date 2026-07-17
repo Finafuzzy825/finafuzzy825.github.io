@@ -35,10 +35,10 @@ export function SiteHeader(): ReactElement {
 
         <div className="hidden items-center gap-3 min-[1280px]:flex">
           <Link className="button-secondary" href="/professionals">
-            专业用户加入
+            个人专业用户加入
           </Link>
           <Link className="button-primary" href="/join">
-            申请生态共建
+            机构合作申请
           </Link>
           <ThemeToggle />
           <LanguageToggle />
@@ -54,10 +54,10 @@ export function SiteHeader(): ReactElement {
             </nav>
             <div className="mt-4 grid gap-3 border-t border-[var(--alliance-border)] pt-4">
               <Link className="button-secondary justify-center" href="/professionals">
-                专业用户加入
+                个人专业用户加入
               </Link>
               <Link className="button-primary justify-center" href="/join">
-                申请生态共建
+                机构合作申请
               </Link>
             </div>
             <div className="mt-4 flex justify-center gap-3 border-t border-[var(--alliance-border)] pt-4">

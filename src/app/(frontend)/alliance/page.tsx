@@ -6,6 +6,7 @@ import { PageHero } from '@/components/site/page-hero'
 import { SectionHeading } from '@/components/site/section-heading'
 import {
   ALLIANCE_DIRECTIONS,
+  ALLIANCE_INTRO,
   ALLIANCE_MECHANISM,
   ALLIANCE_MISSION,
   ALLIANCE_VALUES,
@@ -13,7 +14,7 @@ import {
 
 export const metadata: Metadata = {
   alternates: { canonical: '/alliance' },
-  description: '了解联盟宗旨、共同价值与协作机制，以及联盟如何连接产业力量、推动开放协同。',
+  description: '了解中关村自主大模型产业联盟的宗旨、联盟简介、共同价值与协作机制，及其如何连接产业力量、推动开放安全协同。',
   title: '联盟介绍',
 }
 
@@ -26,7 +27,7 @@ export default function AlliancePage(): ReactElement {
             了解参与方式
           </Link>
         }
-        description="连接自主大模型产业中的技术、场景、人才与生态资源，以开放协作推动可信、可持续的产业发展。"
+        description="汇聚自主大模型力量，共建开放、安全、协同的产业生态，推动技术创新、产业协同、场景落地与国际合作。"
         eyebrow="关于联盟"
         title="联盟介绍"
       />
@@ -41,6 +42,23 @@ export default function AlliancePage(): ReactElement {
       </section>
 
       <section className="block block--subtle">
+        <div className="site-container">
+          <SectionHeading
+            description="连接高校、科研机构和产业伙伴，推动形成具有国际竞争力的自主大模型产业生态。"
+            eyebrow="联盟简介"
+            title="关于中关村自主大模型产业联盟"
+          />
+          <div className="mt-7 flex max-w-[70ch] flex-col gap-5">
+            {ALLIANCE_INTRO.map((paragraph) => (
+              <p className="text-lg leading-relaxed text-[var(--text-body)]" key={paragraph}>
+                {paragraph}
+              </p>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="block">
         <div className="site-container">
           <SectionHeading
             description="以共同原则连接不同技术路线、机构能力与专业经验。"
@@ -58,10 +76,10 @@ export default function AlliancePage(): ReactElement {
         </div>
       </section>
 
-      <section className="block">
+      <section className="block block--subtle">
         <div className="site-container split">
           <SectionHeading
-            description="联盟统筹方向，工作组和专项聚焦议题，成员伙伴根据能力与意愿参与。"
+            description="联盟统筹重点方向，下设工作组（如网络安全工作组）聚焦专业议题，并依托工作组推进重点项目。"
             eyebrow="组织方式"
             title="协作机制"
           />
@@ -78,7 +96,7 @@ export default function AlliancePage(): ReactElement {
         </div>
       </section>
 
-      <section className="block block--subtle">
+      <section className="block">
         <div className="site-container">
           <SectionHeading
             description="从共同议题出发，持续形成可参与、可验证、可传播的产业协作。"

@@ -68,7 +68,7 @@ export default function NewsPage(): ReactElement {
     <main id="main-content">
       <PageHero
         description="发布经联盟确认的新闻、活动、行业观察与阶段成果，记录生态协作的真实进展。"
-        eyebrow="NEWS & UPDATES"
+        eyebrow="最新动态"
         title="新闻动态"
       />
       <section className="block">

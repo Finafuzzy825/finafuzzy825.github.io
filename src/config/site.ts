@@ -11,7 +11,7 @@ export const THEME_STORAGE_KEY = 'zgcllm-theme'
 
 export const SITE_NAME = '中关村自主大模型产业联盟'
 export const SITE_DESCRIPTION =
-  '中关村自主大模型产业联盟官方网站，连接自主大模型产业力量，发布联盟动态、重点专项与生态合作信息。'
+  '中关村自主大模型产业联盟官方网站，汇聚自主大模型力量，共建开放、安全、协同的产业生态，发布联盟动态、重点工作与生态合作信息。'
 
 const DEFAULT_SITE_URL = 'https://www.zgcllm.org.cn'
 
@@ -31,7 +31,7 @@ export const SITE_URL = resolveSiteUrl(process.env.NEXT_PUBLIC_SITE_URL)
 
 export const SITE_NAVIGATION: readonly NavigationItem[] = [
   { href: '/alliance', label: '联盟介绍' },
-  { href: '/working-groups', label: '工作组与专项' },
+  { href: '/working-groups', label: '工作组' },
   { href: '/cybersecurity', label: '网络安全生态' },
   { href: '/members', label: '成员伙伴' },
   { href: '/news', label: '新闻动态' },
@@ -53,13 +53,13 @@ export const APPLICATION_TARGETS: Readonly<Record<ApplicationKind, ExternalAppli
   institution: {
     href: process.env.NEXT_PUBLIC_INSTITUTION_APPLICATION_URL,
     internalHref: '/join',
-    label: '申请生态共建',
+    label: '机构合作申请',
     unavailableMessage: '申请通道准备中，请通过官网联系方式与联盟联系。',
   },
   professional: {
     href: process.env.NEXT_PUBLIC_PROFESSIONAL_APPLICATION_URL,
     internalHref: '/professionals',
-    label: '专业用户加入',
+    label: '个人专业用户加入',
     unavailableMessage: '申请通道准备中，请通过官网联系方式与联盟联系。',
   },
 } as const

@@ -28,10 +28,20 @@ describe('site configuration', () => {
     expect(PUBLIC_STATIC_ROUTES).not.toContain('/professionals')
   })
 
-  it('keeps institution as the sole application target after retiring professionals', () => {
+  it('derives working-group sub-routes from WORKING_GROUPS', () => {
+    expect(PUBLIC_STATIC_ROUTES).toContain('/working-groups/cybersecurity')
+    expect(PUBLIC_STATIC_ROUTES).toContain('/working-groups/cybersecurity/members')
+    expect(PUBLIC_STATIC_ROUTES).toContain('/working-groups/cybersecurity/join')
+  })
+
+  it('keeps institution and reintroduces professional as application targets', () => {
     expect(APPLICATION_TARGETS.institution.internalHref).toBe('/join')
     expect(APPLICATION_TARGETS.institution.label).toBe('机构合作申请')
-    expect(APPLICATION_TARGETS).not.toHaveProperty('professional')
+    expect(APPLICATION_TARGETS.professional.href).toBe(
+      process.env.NEXT_PUBLIC_PROFESSIONAL_APPLICATION_URL,
+    )
+    expect(APPLICATION_TARGETS.professional.internalHref).toBe('/working-groups/cybersecurity/join')
+    expect(APPLICATION_TARGETS.professional.label).toBe('专业用户申请')
   })
 
   it.each([

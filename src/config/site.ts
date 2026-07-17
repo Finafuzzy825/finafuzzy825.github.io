@@ -1,3 +1,4 @@
+import { WORKING_GROUPS } from '@/content/working-groups'
 import type {
   ApplicationKind,
   ExternalApplicationTarget,
@@ -37,10 +38,17 @@ export const SITE_NAVIGATION: readonly NavigationItem[] = [
   { href: '/news', label: '新闻动态' },
 ] as const
 
+const WORKING_GROUP_SUB_ROUTES = WORKING_GROUPS.flatMap(({ slug }) => [
+  `/working-groups/${slug}`,
+  `/working-groups/${slug}/members`,
+  `/working-groups/${slug}/join`,
+])
+
 export const PUBLIC_STATIC_ROUTES = [
   '/',
   '/alliance',
   '/working-groups',
+  ...WORKING_GROUP_SUB_ROUTES,
   '/cybersecurity',
   '/members',
   '/news',
@@ -53,6 +61,12 @@ export const APPLICATION_TARGETS: Readonly<Record<ApplicationKind, ExternalAppli
     href: process.env.NEXT_PUBLIC_INSTITUTION_APPLICATION_URL,
     internalHref: '/join',
     label: '机构合作申请',
+    unavailableMessage: '申请通道准备中，请通过官网联系方式与联盟联系。',
+  },
+  professional: {
+    href: process.env.NEXT_PUBLIC_PROFESSIONAL_APPLICATION_URL,
+    internalHref: '/working-groups/cybersecurity/join',
+    label: '专业用户申请',
     unavailableMessage: '申请通道准备中，请通过官网联系方式与联盟联系。',
   },
 } as const
@@ -96,8 +110,8 @@ export const CORE_MODULES: readonly CoreModule[] = [
     title: '联盟介绍',
   },
   {
-    description: '提供结构化入盟申请、材料上传和进度管理。',
-    path: '/alliance/join',
+    description: '提供入盟申请说明，跳转至外部飞书表单完成提交，站内不上传材料、不提供后台审核。',
+    path: '/join',
     slug: 'alliance-application',
     title: '加入联盟',
   },
@@ -114,7 +128,7 @@ export const CORE_MODULES: readonly CoreModule[] = [
     title: '工作组成员',
   },
   {
-    description: '接收加入工作组的申请并支持后台审核流转。',
+    description: '提供加入工作组的申请说明，跳转至外部飞书表单完成提交，站内不提供后台审核流转。',
     path: '/working-groups/[slug]/join',
     slug: 'working-group-application',
     title: '加入工作组',

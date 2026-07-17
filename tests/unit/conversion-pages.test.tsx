@@ -40,8 +40,9 @@ describe('institution conversion page', () => {
 })
 
 describe('professional conversion page', () => {
-  it('is fully retired: page removed and professional target no longer exists', () => {
-    expect(APPLICATION_TARGETS).not.toHaveProperty('professional')
+  it('is reintroduced as a working-group join target, not a standalone /professionals page', () => {
+    expect(APPLICATION_TARGETS).toHaveProperty('professional')
+    expect(APPLICATION_TARGETS.professional.internalHref).toBe('/working-groups/cybersecurity/join')
   })
 })
 

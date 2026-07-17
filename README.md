@@ -2,7 +2,8 @@
 
 中关村自主大模型产业联盟（ZGCLLM）官方网站工程。正式主域名为
 [`www.zgcllm.org.cn`](https://www.zgcllm.org.cn)，`zgcllm.cn` 和 `zgcllm.net` 作为品牌保护域名，
-上线时统一 301 跳转到主域名。
+上线时统一 301 跳转到主域名。`zgc-llm.org.cn`、`zgc-llm.cn`、`zgc-llm.com`、`zgc-llm.net`
+已注册，作为备选域名。
 
 ## 首期范围
 

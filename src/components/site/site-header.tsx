@@ -5,7 +5,6 @@ import type { ReactElement } from 'react'
 import { SITE_NAME, SITE_NAVIGATION } from '@/config/site'
 import { LanguageToggle } from './language-toggle'
 import { SiteNavigationLink } from './site-navigation-link'
-import { ThemeToggle } from './theme-toggle'
 
 function NavigationLinks(): ReactElement {
   return (
@@ -44,14 +43,12 @@ export function SiteHeader(): ReactElement {
           <Link className="button-primary" href="/join">
             机构合作申请
           </Link>
-          <ThemeToggle />
           <LanguageToggle />
         </div>
 
-        {/* 窄屏(<1280px)常驻控件簇：主题切换按钮与「菜单」并排，任何宽度都伸手可点，
+        {/* 窄屏(<1280px)常驻控件簇：「菜单」按钮在任何宽度都伸手可点，
             不再埋进折叠菜单里。桌面端(≥1280px)仍用上方的控件簇。 */}
         <div className="flex items-center gap-2 min-[1280px]:hidden">
-          <ThemeToggle />
           <details className="mobile-menu">
             <summary aria-label="打开网站导航" className="mobile-menu__trigger">
               <span aria-hidden="true">菜单</span>

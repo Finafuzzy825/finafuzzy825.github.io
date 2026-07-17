@@ -49,7 +49,7 @@ test.describe('工作组导航链路', () => {
     await expect(main.getByRole('heading', { level: 1, name: '成员名单' })).toBeVisible()
     await expect(main.getByRole('heading', { level: 3, name: '成员名单整理中' })).toBeVisible()
     await expect(
-      main.getByText('成员名单将在获得公开授权后发布', { exact: false }),
+      main.getByText('成员名单将在获得公开授权后陆续公开', { exact: false }),
     ).toBeVisible()
     await expect(main.getByRole('link', { name: '申请加入本工作组' })).toHaveAttribute(
       'href',

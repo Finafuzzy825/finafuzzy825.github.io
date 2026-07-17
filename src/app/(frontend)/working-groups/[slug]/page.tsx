@@ -128,14 +128,14 @@ export function WorkingGroupOverview({ group }: WorkingGroupOverviewProps): Reac
       <section className="block block--subtle">
         <div className="site-container">
           <SectionHeading
-            description="仅公布已确认对外发布的成果，持续沉淀可公开的阶段性进展。"
+            description="联盟将持续沉淀可公开的阶段性进展，并在成果正式发布后第一时间对外公开。"
             eyebrow="阶段成果"
             title="对外发布的阶段性成果"
           />
           {group.outcomes.length === 0 ? (
             <div className="empty">
               <h3>成果整理中</h3>
-              <p>阶段性成果将在正式发布后陆续公开；在此之前，我们不会展示未经确认的内容。</p>
+              <p>更多阶段性成果将在正式发布后陆续更新，敬请关注。</p>
             </div>
           ) : (
             <div className="grid-2">

@@ -6,10 +6,6 @@ import type {
   ResolvedApplicationTarget,
 } from '@/types/content'
 
-// 主题持久化 key。内联在 layout.tsx 的无闪烁脚本因无法 import，
-// 以同值字符串字面量 'zgcllm-theme' 重复一次，务必与此常量保持一致。
-export const THEME_STORAGE_KEY = 'zgcllm-theme'
-
 export const SITE_NAME = '中关村自主大模型产业联盟'
 export const SITE_DESCRIPTION =
   '中关村自主大模型产业联盟官方网站，汇聚自主大模型力量，共建开放、安全、协同的产业生态，发布联盟动态、重点工作与生态合作信息。'

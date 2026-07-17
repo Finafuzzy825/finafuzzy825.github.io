@@ -56,7 +56,7 @@ describe('alliance page', () => {
     expect(screen.getByRole('heading', { level: 2, name: '联盟宗旨' })).toBeTruthy()
     expect(screen.getByRole('heading', { level: 2, name: '共同价值' })).toBeTruthy()
     expect(screen.getByRole('heading', { level: 2, name: '协作机制' })).toBeTruthy()
-    expect(screen.getByRole('heading', { level: 2, name: '面向长期价值持续行动' })).toBeTruthy()
+    expect(screen.getByRole('heading', { level: 2, name: '把共同议题转化为持续行动' })).toBeTruthy()
     expect(screen.getByRole('link', { name: '了解参与方式' }).getAttribute('href')).toBe('/join')
     expect(screen.getByRole('main').id).toBe('main-content')
   })

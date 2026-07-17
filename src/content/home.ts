@@ -4,7 +4,7 @@ export const HOME_VALUE_PROPOSITIONS: readonly ValueProposition[] = [
   {
     description: '坚持核心基座模型开源共享，连接模型、芯片、算力、数据、平台及行业应用力量，构建开放协作网络。',
     id: 'open',
-    title: '开放协作',
+    title: '开放共享',
   },
   {
     description:
@@ -13,9 +13,9 @@ export const HOME_VALUE_PROPOSITIONS: readonly ValueProposition[] = [
     title: '安全可信',
   },
   {
-    description: '保持长期主义，集中资源攻坚长程任务与自治智能体系统，推动自主大模型持续迈向能力新高峰。',
-    id: 'longterm',
-    title: '长期主义',
+    description: '汇聚产业各方力量，集中资源攻坚核心技术、长程任务与自治智能体系统，推动自主大模型能力持续迈向新高峰。',
+    id: 'collaborative',
+    title: '协同攻坚',
   },
 ] as const
 
@@ -30,7 +30,7 @@ export const HOME_DIRECTIONS = [
 
 export const HOME_ACTION_SLOGANS = [
   '从示范智能体走向生产级自治系统',
-  '从短期速赢走向长期技术攀登',
+  '从分散探索走向协同攻坚',
   '从封闭黑盒走向透明可信',
   '从单点能力突破走向长程任务落地',
 ] as const

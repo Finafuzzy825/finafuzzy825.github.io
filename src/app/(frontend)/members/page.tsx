@@ -36,9 +36,9 @@ export function MembersDirectory({ members }: MembersDirectoryProps): ReactEleme
         <div className="site-container">
           <div className="empty">
             <h3>成员信息整理中</h3>
-            <p>成员名称与标识将在完成公开授权后发布；在此之前，我们不会展示未经授权的名单或标识。</p>
+            <p>更多成员名称与标识将在完成公开授权后陆续发布，敬请关注。</p>
             <Link className="btn btn--primary" href="/join">
-              了解生态共建
+              申请成为生态伙伴
             </Link>
           </div>
         </div>

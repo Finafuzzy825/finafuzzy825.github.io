@@ -28,7 +28,7 @@ design_tokens_source: docs/design/prototypes/_design-system.css
 
 ### 1.2 数据流
 
-```
+```text
 layout.tsx (server)
   ├── <head> 内联无闪烁脚本（读取 localStorage / prefers-color-scheme → 设 html[data-theme]）
   ├── styles.css（:root light + html[data-theme="dark"] override + 组件类层）
@@ -54,7 +54,7 @@ layout.tsx (server)
 3. 原型的组件类层（`.card`/`.btn`/`.page-hero` 等）全部消费裸命名 token，移植即用。
 
 **兼容别名层（关键去风险手段）**：在 `:root` 与 `[data-theme="dark"]` 之外追加一段映射，把旧 `--alliance-*` 定义为对新 token 的引用：
-```
+```css
 --alliance-brand-primary: var(--brand-primary);
 --alliance-bg-hero: var(--bg-hero);
 --alliance-text-title: var(--text-title);  /* 等等，覆盖现有页面用到的全部 --alliance-* */
@@ -90,7 +90,7 @@ layout.tsx (server)
 
 在 `layout.tsx` 的 `<html>` 内、`<body>` 之前注入**同步阻塞内联脚本**（`<script dangerouslySetInnerHTML>`），在首帧绘制前设定 `html[data-theme]`：
 
-```
+```text
 优先级（首帧）：localStorage['zgcllm-theme'] > prefers-color-scheme > 'light'
 ```
 

@@ -428,6 +428,33 @@ summary:focus-visible {
   color: #fff;
 }
 
+/* 语言 toggle 的“即将支持”反馈：可见小气泡 + role=status/aria-live 供读屏播报 */
+.language-toggle {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.language-toggle__hint {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  white-space: nowrap;
+  padding: 4px 8px;
+  border-radius: var(--radius-ctrl);
+  background: var(--brand-primary);
+  color: var(--text-inverse);
+  font-size: 12px;
+  font-weight: 600;
+  box-shadow: var(--shadow-pop);
+  pointer-events: none;
+  z-index: 50;
+}
+
+.language-toggle__hint:empty {
+  display: none;
+}
+
 .hamburger {
   display: none;
 }
@@ -517,7 +544,7 @@ summary:focus-visible {
   color: #fff;
 }
 
-.page-hero p {
+.page-hero p:not(.eyebrow) {
   margin: 20px 0 0;
   font-size: 17px;
   line-height: 1.8;
@@ -621,7 +648,7 @@ summary:focus-visible {
   letter-spacing: -0.01em;
 }
 
-.sec-head p {
+.sec-head p:not(.eyebrow) {
   margin: 14px 0 0;
   font-size: 16px;
   line-height: 1.75;
@@ -693,7 +720,7 @@ section.block {
   margin-top: 0;
 }
 
-.card p {
+.card p:not(.eyebrow) {
   margin: 10px 0 0;
   line-height: 1.75;
   color: var(--text-muted);
@@ -834,7 +861,7 @@ section.block {
   font-weight: 700;
 }
 
-.cta-band p {
+.cta-band p:not(.eyebrow) {
   margin: 14px 0 0;
   max-width: 60ch;
   line-height: 1.8;
@@ -1038,7 +1065,7 @@ section.block {
   letter-spacing: -0.01em;
 }
 
-.notfound p {
+.notfound p:not(.eyebrow) {
   margin: 22px 0 0;
   font-size: 18px;
   line-height: 1.8;
@@ -1083,6 +1110,15 @@ section.block {
 .footer__brand p {
   margin-top: 14px;
   max-width: 34ch;
+}
+
+/* 品牌名（首个段落）不应被 .footer p 的正文样式覆盖，显式消费 inverse token */
+.footer__brand p:first-child {
+  margin-top: 0;
+  max-width: none;
+  color: var(--text-inverse);
+  font-size: 18px;
+  font-weight: 600;
 }
 
 .footer__bottom {

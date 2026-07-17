@@ -82,7 +82,11 @@ describe('members page', () => {
 
     expect(foundingSection).not.toBeNull()
     expect(researchSection).not.toBeNull()
-    expect(foundingSection?.className).not.toBe(researchSection?.className)
+    // 契约：跳过中间组后，渲染出的两组仍交替——发起成员为普通区块、科研伙伴为浅色区块
+    expect(foundingSection?.classList.contains('block')).toBe(true)
+    expect(foundingSection?.classList.contains('block--subtle')).toBe(false)
+    expect(researchSection?.classList.contains('block')).toBe(true)
+    expect(researchSection?.classList.contains('block--subtle')).toBe(true)
   })
 
   it('test_members_metadata_page_has_independent_title_and_canonical', () => {

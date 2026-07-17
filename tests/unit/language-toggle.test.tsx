@@ -29,8 +29,18 @@ describe('language toggle', () => {
     render(<LanguageToggle />)
 
     const control = screen.getByRole('button', { name: '切换语言 / Switch language' })
+    const status = screen.getByRole('status')
+
+    // 点击前无反馈文案
+    expect(status.textContent).toBe('')
 
     expect(() => fireEvent.click(control)).not.toThrow()
+
+    // 点击后出现可见 + 可播报的“即将支持”反馈（移除 setShowHint 会使该断言失败）
+    expect(status.textContent).toBe('即将支持')
+    expect(status.getAttribute('aria-live')).toBe('polite')
+
+    // 占位组件不切换正文语言、不改 html lang
     expect(document.documentElement.lang).toBe(initialLang)
     expect(screen.getByText('中')).toBeTruthy()
     expect(screen.getByText('EN')).toBeTruthy()

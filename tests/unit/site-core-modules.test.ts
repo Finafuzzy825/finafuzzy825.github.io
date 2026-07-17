@@ -89,8 +89,8 @@ describe('CORE_MODULES copy', () => {
   it('never mentions the retired admin-review workflow, even in a negated sentence', () => {
     const bannedPhrases = ['材料上传', '进度管理', '后台审核流转']
 
-    for (const module of CORE_MODULES) {
-      const text = `${module.title}${module.description}`
+    for (const coreModule of CORE_MODULES) {
+      const text = `${coreModule.title}${coreModule.description}`
       for (const phrase of bannedPhrases) {
         expect(text).not.toContain(phrase)
       }

@@ -64,7 +64,10 @@ jobs:
       - name: Run end-to-end tests
         run: pnpm test:e2e
       - name: Upload Playwright report
-        if: ${{ !cancelled() }}
+        # 仅在测试失败时上传报告（此时才有诊断价值），避免绿色构建每次占用 artifact 配额；
+        # continue-on-error 确保配额/上传问题本身不会拖垮整个 job。
+        if: failure()
+        continue-on-error: true
         uses: actions/upload-artifact@v4
         with:
           name: playwright-report

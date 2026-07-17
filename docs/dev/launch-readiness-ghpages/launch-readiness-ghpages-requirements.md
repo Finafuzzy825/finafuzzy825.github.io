@@ -8,6 +8,8 @@ version: 1
 
 # 需求文档: 上线就绪度收尾（GitHub Pages）
 
+> **更新补记（2026-07-17）**：本文件为该轮上线收尾的历史规划记录。正式主域名已统一为带连字符的 `www.zgc-llm.org.cn`（CNAME 同步更正）。文中域名表述已随之更正，但**现行事实以 [CLAUDE.md](../../../CLAUDE.md) 与 [README.md](../../../README.md) 为准**，本历史文档不作为配置源。
+
 ## 1. 概述
 
 - **一句话**：把 `Clouditera/zgcllm` 官网收尾到「可发布到 GitHub Pages（自定义域名，CNAME）」的干净可发布状态，并开 PR 到 main。

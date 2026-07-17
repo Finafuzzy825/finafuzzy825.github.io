@@ -90,7 +90,7 @@ export default function MembersPage(): ReactElement {
   return (
     <main id="main-content">
       <PageHero
-        description="中关村自主大模型产业联盟现有 32 家单位会员。在获得公开授权的前提下，以下展示已公开的理事会与监事会成员单位，其余会员待授权后补充。"
+        description="联盟现有 32 家单位会员。以下展示已公开的理事会与监事会成员单位，更多成员将在获得授权后陆续呈现。"
         eyebrow="生态伙伴"
         title="成员伙伴"
       />

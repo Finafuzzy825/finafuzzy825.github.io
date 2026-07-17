@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import Link from 'next/link'
 import type { ReactElement } from 'react'
 
@@ -21,9 +22,15 @@ export function SiteHeader(): ReactElement {
     <header className="site-header">
       <div className="site-container flex min-h-20 items-center justify-between gap-4">
         <Link className="flex min-w-0 items-center gap-3" href="/">
-          <span aria-hidden="true" className="brand-mark">
-            中
-          </span>
+          <Image
+            alt=""
+            aria-hidden="true"
+            className="brand-logo"
+            height={40}
+            priority
+            src="/brand/llm-alliance-logo.png"
+            width={40}
+          />
           <span className="max-w-72 whitespace-nowrap text-sm font-semibold leading-5 text-[var(--alliance-text-title)] sm:text-base">
             {SITE_NAME}
           </span>
@@ -34,9 +41,6 @@ export function SiteHeader(): ReactElement {
         </nav>
 
         <div className="hidden items-center gap-3 min-[1280px]:flex">
-          <Link className="button-secondary" href="/professionals">
-            个人专业用户加入
-          </Link>
           <Link className="button-primary" href="/join">
             机构合作申请
           </Link>
@@ -53,9 +57,6 @@ export function SiteHeader(): ReactElement {
               <NavigationLinks />
             </nav>
             <div className="mt-4 grid gap-3 border-t border-[var(--alliance-border)] pt-4">
-              <Link className="button-secondary justify-center" href="/professionals">
-                个人专业用户加入
-              </Link>
               <Link className="button-primary justify-center" href="/join">
                 机构合作申请
               </Link>

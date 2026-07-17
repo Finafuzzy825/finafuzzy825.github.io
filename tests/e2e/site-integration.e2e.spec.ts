@@ -8,7 +8,6 @@ const publicRoutes = [
   '/members',
   '/news',
   '/join',
-  '/professionals',
   '/privacy',
 ] as const
 
@@ -38,8 +37,8 @@ test.describe('site integration', () => {
   })
 
   test('header collapses to the mobile menu below the 1280px breakpoint', async ({ page }) => {
-    // v2 断点为 1280px：完整控件（品牌名 + 5 个中文导航 + 两条 CTA + 主题/语言 toggle）
-    // 自然宽度约 1220px，低于 1280 收起为汉堡，避免 flex 挤压导致中文换行。
+    // v2 断点为 1280px：完整控件（品牌名 + 5 个中文导航 + 机构合作申请 CTA + 主题/语言 toggle）
+    // 在窄于 1280 时收起为汉堡，避免 flex 挤压导致中文换行。
     await page.setViewportSize({ width: 1024, height: 768 })
     await page.goto('/')
 

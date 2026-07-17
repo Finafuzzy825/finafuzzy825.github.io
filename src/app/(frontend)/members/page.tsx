@@ -90,7 +90,7 @@ export default function MembersPage(): ReactElement {
   return (
     <main id="main-content">
       <PageHero
-        description="在获得公开授权的前提下，展示参与联盟建设的产业、科研与生态协作力量。"
+        description="联盟现有 32 家单位会员。以下展示已公开的理事会与监事会成员单位，更多成员将在获得授权后陆续呈现。"
         eyebrow="生态伙伴"
         title="成员伙伴"
       />

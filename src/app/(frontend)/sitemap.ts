@@ -3,6 +3,9 @@ import type { MetadataRoute } from 'next'
 import { getPublishedNews } from '@/content/news'
 import { PUBLIC_STATIC_ROUTES, SITE_URL } from '@/config/site'
 
+// 静态导出（output: export）要求元数据路由在构建期固化为静态文件。
+export const dynamic = 'force-static'
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes: MetadataRoute.Sitemap = PUBLIC_STATIC_ROUTES.map((route) => ({
     changeFrequency: route === '/' ? 'weekly' : 'monthly',

@@ -16,12 +16,43 @@ export interface ResolvedApplicationTarget extends ExternalApplicationTarget {
   isAvailable: boolean
 }
 
+export interface WorkingGroupLead {
+  /** 角色/职责，如「统筹」「技术牵引」「学术指导」 */
+  role: string
+  /** 授权具名单位；未授权则填角色化占位描述 */
+  name: string
+  /** true=已公开授权具名；false=按角色描述（治理边界） */
+  named: boolean
+}
+
 export interface WorkingGroupSummary {
   description: string
-  href: string
+  /** 互链业务专题页，如 '/cybersecurity' */
+  ecosystemHref?: string
+  /** 互链标签，如 '网络安全生态' */
+  ecosystemLabel?: string
   id: string
   kind: 'working-group' | 'initiative'
+  /** 负责人（治理：仅授权者具名） */
+  leads: readonly WorkingGroupLead[]
+  /** 成果（本期可空态占位） */
+  outcomes: readonly string[]
+  /** 职责 */
+  responsibilities: readonly string[]
+  /** 研究方向 */
+  researchDirections: readonly string[]
+  /** 路由键，如 'cybersecurity' */
+  slug: string
   title: string
+}
+
+export interface WorkingGroupMember {
+  description?: string
+  id: string
+  logo?: string
+  name: string
+  /** 参与角色，如「共建单位」「学术支持」 */
+  role?: string
 }
 
 export interface MemberSummary {
@@ -42,6 +73,10 @@ export type ContentBlock =
 export interface NewsEntry {
   body: readonly ContentBlock[]
   category: NewsCategory
+  /** 可选外部行动入口链接（如飞书申请表），须为 https */
+  ctaHref?: string
+  /** 外部行动入口按钮文案，与 ctaHref 成对出现 */
+  ctaLabel?: string
   date: string
   description: string
   featured?: boolean

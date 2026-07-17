@@ -25,7 +25,7 @@ describe('site application links', () => {
   })
 
   it('renders an unavailable state instead of an unsafe link', () => {
-    render(<ExternalApplicationLink configuredUrl="javascript:alert(1)" kind="professional" />)
+    render(<ExternalApplicationLink configuredUrl="javascript:alert(1)" kind="institution" />)
 
     expect(screen.queryByRole('link')).toBeNull()
     expect(screen.getByText(/申请通道准备中/).getAttribute('aria-disabled')).toBe('true')
@@ -33,13 +33,13 @@ describe('site application links', () => {
 })
 
 describe('site header', () => {
-  it('exposes the alliance brand, primary navigation, and two conversion paths', () => {
+  it('exposes the alliance brand, primary navigation, and the institution conversion path', () => {
     render(<SiteHeader />)
 
     expect(screen.getAllByText('中关村自主大模型产业联盟').length).toBeGreaterThan(0)
     expect(screen.getAllByRole('link', { name: '网络安全生态' }).length).toBeGreaterThan(0)
     expect(screen.getAllByRole('link', { name: '机构合作申请' }).length).toBeGreaterThan(0)
-    expect(screen.getAllByRole('link', { name: '个人专业用户加入' }).length).toBeGreaterThan(0)
+    expect(screen.queryByRole('link', { name: '个人专业用户加入' })).toBeNull()
     expect(screen.getByRole('navigation', { name: '主导航' })).toBeTruthy()
     expect(
       screen.getByRole('navigation', { name: '主导航' }).querySelector('[aria-current="page"]')

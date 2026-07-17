@@ -21,21 +21,22 @@ describe('home page', () => {
     ).toBeTruthy()
 
     const institutionLink = screen.getByRole('link', { name: '机构合作申请' })
-    const professionalLink = screen.getByRole('link', { name: '个人专业用户加入' })
 
     expect(institutionLink.getAttribute('href')).toBe('/join')
     expect(institutionLink.className).toContain('btn--primary')
-    expect(professionalLink.getAttribute('href')).toBe('/professionals')
-    expect(professionalLink.className).toContain('btn--ghost')
+    expect(screen.queryByRole('link', { name: '个人专业用户加入' })).toBeNull()
+    expect(document.body.textContent).not.toMatch(/\/professionals/)
     expect(screen.getByRole('link', { name: /了解网络安全生态/ }).getAttribute('href')).toBe(
       '/cybersecurity',
     )
     expect(screen.getByRole('main').id).toBe('main-content')
-    expect(screen.getByRole('heading', { name: '成员信息整理中' })).toBeTruthy()
+    expect(screen.getByRole('heading', { name: '清华大学' })).toBeTruthy()
     expect(screen.getByRole('link', { name: '查看成员伙伴' }).getAttribute('href')).toBe(
       '/members',
     )
-    expect(screen.getByRole('heading', { name: '最新动态即将发布' })).toBeTruthy()
+    expect(
+      screen.getByRole('link', { name: '联盟官方网站正式上线' }).getAttribute('href'),
+    ).toBe('/news/alliance-website-launch')
     expect(screen.getByRole('link', { name: '查看新闻动态' }).getAttribute('href')).toBe('/news')
     expect(document.body.textContent).not.toMatch(/项目初始化|进入内容后台|管理后台/)
   })
@@ -72,9 +73,9 @@ describe('working groups page', () => {
     render(<WorkingGroupsPage />)
 
     expect(screen.getByRole('heading', { level: 1, name: '工作组' })).toBeTruthy()
-    expect(screen.getByRole('heading', { level: 3, name: '网络安全生态' })).toBeTruthy()
-    expect(screen.getByRole('link', { name: /查看网络安全生态/ }).getAttribute('href')).toBe(
-      '/cybersecurity',
+    expect(screen.getByRole('heading', { level: 3, name: '网络安全工作组' })).toBeTruthy()
+    expect(screen.getByRole('link', { name: /查看网络安全工作组/ }).getAttribute('href')).toBe(
+      '/working-groups/cybersecurity',
     )
     expect(screen.getByText(/其余工作组信息将在确认后发布/)).toBeTruthy()
     expect(screen.getByRole('main').id).toBe('main-content')

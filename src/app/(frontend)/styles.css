@@ -1,9 +1,13 @@
 @import 'tailwindcss';
 
-/* 排除 docs/ 目录：设计文档中出现的示意性工具类字面量（如 bg-[var(--alliance-*)]）
-   会被 Tailwind 源扫描误当成真实类并生成非法 CSS，导致 next dev(Turbopack) 解析失败。
-   文档不应驱动样式生成，故显式排除。 */
+/* 排除 docs/ 目录：设计文档中出现的示意性工具类字面量会被 Tailwind
+   源扫描误当成真实类并生成非法 CSS，导致 next dev(Turbopack) 解析失败。
+   文档不应驱动样式生成，故显式排除。
+   注意：此注释内不要写出该类字面量本身——styles.css 自身也会被扫描。 */
 @source not "../../../docs";
+/* 同时排除 .claude/（含工具创建的 git worktree 副本，其中的 docs/ 会带入
+   示意性工具类字面量，触发同样的非法 CSS 生成）。 */
+@source not "../../../.claude";
 
 /* ============================================================
    ZGCLLM Design Language v2 — application stylesheet
@@ -193,6 +197,14 @@ summary:focus-visible {
   font-weight: 700;
   height: 40px;
   justify-content: center;
+  width: 40px;
+}
+
+.brand-logo {
+  border-radius: 10px;
+  flex: 0 0 auto;
+  height: 40px;
+  object-fit: contain;
   width: 40px;
 }
 
@@ -1131,11 +1143,22 @@ section.block {
 }
 
 .footer__bottom {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 24px;
   margin-top: 40px;
   padding-top: 20px;
   border-top: 1px solid rgb(255 255 255 / 12%);
   font-size: 12px;
   color: var(--text-inverse-muted);
+}
+
+.footer__bottom p {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.6;
 }
 
 /* ============================================================

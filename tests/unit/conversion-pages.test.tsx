@@ -3,9 +3,6 @@ import { afterEach, describe, expect, it } from 'vitest'
 
 import JoinPage, { metadata as joinMetadata } from '@/app/(frontend)/join/page'
 import PrivacyPage, { metadata as privacyMetadata } from '@/app/(frontend)/privacy/page'
-import ProfessionalsPage, {
-  metadata as professionalsMetadata,
-} from '@/app/(frontend)/professionals/page'
 import { APPLICATION_TARGETS } from '@/config/site'
 
 afterEach(cleanup)
@@ -43,35 +40,11 @@ describe('institution conversion page', () => {
 })
 
 describe('professional conversion page', () => {
-  it('explains who can participate, how to participate, and participant benefits', () => {
-    render(<ProfessionalsPage />)
-
-    expect(screen.getByRole('heading', { level: 1, name: '专业用户加入' })).toBeTruthy()
-    expect(screen.getByRole('heading', { level: 2, name: '适用人群' })).toBeTruthy()
-    expect(screen.getByRole('heading', { level: 2, name: '参与方式' })).toBeTruthy()
-    expect(screen.getByRole('heading', { level: 2, name: '参与权益' })).toBeTruthy()
-    expect(screen.getByRole('main').id).toBe('main-content')
-  })
-
-  it('uses the independent professional target and safely falls back when its URL is missing', () => {
-    render(<ProfessionalsPage />)
-
-    const main = screen.getByRole('main')
-    expect(within(main).queryByRole('link', { name: /专业用户加入/ })).toBeNull()
-    expect(
-      within(main)
-        .getByText(APPLICATION_TARGETS.professional.unavailableMessage)
-        .getAttribute('aria-disabled'),
-    ).toBe('true')
-    expect(APPLICATION_TARGETS.professional.internalHref).not.toBe(
-      APPLICATION_TARGETS.institution.internalHref,
-    )
-  })
-
-  it('defines page-specific metadata', () => {
-    expect(professionalsMetadata.title).toBe('专业用户加入')
-    expect(professionalsMetadata.description).toMatch(/专业用户/)
-    expect(professionalsMetadata.alternates).toEqual({ canonical: '/professionals' })
+  it('is reintroduced as a working-group join target, not a standalone /professionals page', () => {
+    expect(APPLICATION_TARGETS).toHaveProperty('professional')
+    expect(APPLICATION_TARGETS.professional.internalHref).toBe('/working-groups/cybersecurity/join')
+    // 历史决策：professional 类型复活仅作为工作组加入入口，/professionals 独立页仍不存在
+    expect(APPLICATION_TARGETS.professional.internalHref).not.toMatch(/^\/professionals\b/)
   })
 })
 

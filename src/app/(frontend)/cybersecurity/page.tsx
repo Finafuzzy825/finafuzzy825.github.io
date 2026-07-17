@@ -31,8 +31,8 @@ export default function CybersecurityPage(): ReactElement {
             <Link className="btn btn--primary" href="/join">
               机构合作申请
             </Link>
-            <Link className="btn btn--ghost" href="/professionals">
-              个人专业用户加入
+            <Link className="btn btn--ghost" href="/working-groups/cybersecurity">
+              查看工作组组织信息
             </Link>
           </>
         }
@@ -186,9 +186,6 @@ export default function CybersecurityPage(): ReactElement {
             >
               <Link className="btn btn--primary" href="/join">
                 机构合作申请
-              </Link>
-              <Link className="btn btn--ghost" href="/professionals">
-                个人专业用户加入
               </Link>
             </div>
           </div>

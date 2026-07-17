@@ -11,7 +11,10 @@ export function SiteFooter(): ReactElement {
           <div className="footer__brand">
             <p className="text-lg font-semibold text-white">{SITE_NAME}</p>
             <p>汇聚自主大模型产业创新力量，连接技术、场景、人才与生态资源。</p>
-            <p>联系信息将在正式发布前补充</p>
+            <p>
+              联系邮箱：
+              <a href="mailto:contact@zgc-llm.org.cn">contact@zgc-llm.org.cn</a>
+            </p>
           </div>
           <div>
             <h4>了解联盟</h4>
@@ -26,10 +29,6 @@ export function SiteFooter(): ReactElement {
             <h4>参与联盟</h4>
             <Link href="/join">
               生态共建
-              <br />
-            </Link>
-            <Link href="/professionals">
-              专业用户
               <br />
             </Link>
             <Link href="/members">成员伙伴</Link>
@@ -47,7 +46,11 @@ export function SiteFooter(): ReactElement {
           <p>
             © {new Date().getFullYear()} {SITE_NAME}
           </p>
-          <p>备案信息将在正式发布前补充</p>
+          <p>
+            <a href="https://beian.miit.gov.cn/" target="_blank" rel="noreferrer">
+              京ICP备2025000000号-1
+            </a>
+          </p>
         </div>
       </div>
     </footer>

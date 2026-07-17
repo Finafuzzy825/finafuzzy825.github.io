@@ -4,12 +4,17 @@ import { notFound } from 'next/navigation'
 import type { ReactElement } from 'react'
 
 import { PageHero } from '@/components/site/page-hero'
+import { isSafeExternalUrl } from '@/config/site'
 import { getPublishedNews, getPublishedNewsBySlug, NEWS_ENTRIES } from '@/content/news'
 import type { ContentBlock, NewsEntry } from '@/types/content'
 
 interface NewsDetailPageProps {
   params: Promise<{ slug: string }>
 }
+
+// 仅预渲染 generateStaticParams 返回的 slug；未知 slug 一律 404。
+// 静态导出（output: export）要求路由无运行时渲染需求，新闻为空时也能正常导出。
+export const dynamicParams = false
 
 interface NewsArticleProps {
   entry: NewsEntry
@@ -78,6 +83,18 @@ export function NewsArticle({ entry }: NewsArticleProps): ReactElement {
             {entry.body.map((block, index) => (
               <ContentBlockView block={block} key={`${block.type}-${index}`} />
             ))}
+            {entry.ctaHref && entry.ctaLabel && isSafeExternalUrl(entry.ctaHref) ? (
+              <p className="cta">
+                <a
+                  className="btn btn--primary"
+                  href={entry.ctaHref}
+                  rel="noreferrer noopener"
+                  target="_blank"
+                >
+                  {entry.ctaLabel}
+                </a>
+              </p>
+            ) : null}
             <div className="back">
               <Link className="btn btn--ghost" href="/news">
                 ← 返回新闻中心

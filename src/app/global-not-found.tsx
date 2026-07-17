@@ -1,9 +1,18 @@
+import type { Metadata } from 'next'
 import Link from 'next/link'
 import type { ReactElement } from 'react'
 
 import { SiteFooter } from '@/components/site/site-footer'
 import { SiteHeader } from '@/components/site/site-header'
+import { SITE_NAME, SITE_URL } from '@/config/site'
 import './(frontend)/styles.css'
+
+// global-not-found 是独立 HTML 页，不经过分组 layout，需自带 metadataBase，
+// 否则 OG/图标等绝对地址会回退到 http://localhost:3000。
+export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
+  title: `页面未找到｜${SITE_NAME}`,
+}
 
 export default function GlobalNotFound(): ReactElement {
   return (

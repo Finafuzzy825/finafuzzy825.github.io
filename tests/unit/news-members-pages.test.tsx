@@ -19,6 +19,7 @@ import NewsArticlePage, {
   NewsArticle,
 } from '@/app/(frontend)/news/[slug]/page'
 import NewsPage, { metadata as newsMetadata, NewsList } from '@/app/(frontend)/news/page'
+import { NEWS_ENTRIES } from '@/content/news'
 
 afterEach(cleanup)
 
@@ -45,11 +46,19 @@ const draftEntry: NewsEntry = {
 }
 
 describe('members page', () => {
-  it('test_members_page_empty_members_renders_authorization_state', () => {
+  it('test_members_page_populated_members_renders_directory', () => {
     render(<MembersPage />)
 
     expect(screen.getByRole('main').getAttribute('id')).toBe('main-content')
     expect(screen.getByRole('heading', { level: 1, name: '成员伙伴' })).toBeTruthy()
+    // MEMBERS 已收录已公开具名的理事会/监事会单位，渲染分组目录而非空态
+    expect(screen.getByText('清华大学')).toBeTruthy()
+    expect(screen.queryByText('成员信息整理中')).toBeNull()
+  })
+
+  it('test_members_directory_empty_members_renders_authorization_state', () => {
+    render(<MembersDirectory members={[]} />)
+
     expect(screen.getByText('成员信息整理中')).toBeTruthy()
   })
 
@@ -97,11 +106,19 @@ describe('members page', () => {
 })
 
 describe('news list page', () => {
-  it('test_news_page_empty_news_renders_honest_state', () => {
+  it('renders the published inaugural launch announcement', () => {
     render(<NewsPage />)
 
     expect(screen.getByRole('main').getAttribute('id')).toBe('main-content')
     expect(screen.getByRole('heading', { level: 1, name: '新闻动态' })).toBeTruthy()
+    expect(screen.getByRole('link', { name: '联盟官方网站正式上线' }).getAttribute('href')).toBe(
+      '/news/alliance-website-launch',
+    )
+  })
+
+  it('test_news_page_empty_news_renders_honest_state', () => {
+    render(<NewsList entries={[]} />)
+
     expect(screen.getByText('最新动态即将发布')).toBeTruthy()
   })
 
@@ -130,6 +147,58 @@ describe('news detail page', () => {
     expect(screen.getByText('<script>alert("unsafe")</script>')).toBeTruthy()
     expect(screen.getByRole('list').children).toHaveLength(2)
     expect(container.querySelector('script')).toBeNull()
+  })
+
+  it('test_news_article_renders_https_cta_as_safe_external_link', () => {
+    render(
+      <NewsArticle
+        entry={{
+          ...publishedEntry,
+          ctaHref: 'https://example.feishu.cn/share/base/form/abc',
+          ctaLabel: '填写申请',
+        }}
+      />,
+    )
+
+    const cta = screen.getByRole('link', { name: '填写申请' })
+    expect(cta.getAttribute('href')).toBe('https://example.feishu.cn/share/base/form/abc')
+    expect(cta.getAttribute('target')).toBe('_blank')
+    expect(cta.getAttribute('rel')).toBe('noreferrer noopener')
+  })
+
+  it('test_news_article_drops_non_https_cta', () => {
+    render(
+      <NewsArticle
+        entry={{ ...publishedEntry, ctaHref: 'http://insecure.example/form', ctaLabel: '填写申请' }}
+      />,
+    )
+
+    expect(screen.queryByRole('link', { name: '填写申请' })).toBeNull()
+  })
+
+  it.each([
+    { case: 'ctaHref only, no label', cta: { ctaHref: 'https://example.feishu.cn/form' } },
+    { case: 'ctaLabel only, no href', cta: { ctaLabel: '填写申请' } },
+    { case: 'empty href', cta: { ctaHref: '', ctaLabel: '填写申请' } },
+    { case: 'empty label', cta: { ctaHref: 'https://example.feishu.cn/form', ctaLabel: '' } },
+    { case: 'malformed href', cta: { ctaHref: 'not-a-url', ctaLabel: '填写申请' } },
+  ])('test_news_article_renders_no_cta_when_config_incomplete: $case', ({ cta }) => {
+    render(<NewsArticle entry={{ ...publishedEntry, ...cta }} />)
+
+    expect(screen.queryByRole('link', { name: '填写申请' })).toBeNull()
+  })
+
+  it('test_news_article_open_program_entry_renders_feishu_cta', () => {
+    const entry = NEWS_ENTRIES.find((item) => item.slug === 'cybersecurity-open-program')
+    expect(entry).toBeDefined()
+
+    render(<NewsArticle entry={entry!} />)
+
+    const cta = screen.getByRole('link', { name: entry!.ctaLabel! })
+    expect(cta.getAttribute('href')).toBe(entry!.ctaHref)
+    expect(cta.getAttribute('href')?.startsWith('https://')).toBe(true)
+    expect(cta.getAttribute('target')).toBe('_blank')
+    expect(cta.getAttribute('rel')).toBe('noreferrer noopener')
   })
 
   it('test_news_static_params_mixed_entries_includes_only_published_slugs', () => {

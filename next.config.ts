@@ -15,6 +15,10 @@ const nextConfig: NextConfig = {
     globalNotFound: true,
   },
   output: isStaticExport ? 'export' : 'standalone',
+  // GitHub Pages 直接托管静态文件、不会把 /alliance 重写到 /alliance.html。
+  // 导出时开启 trailingSlash，使每个路由产出 alliance/index.html（目录索引，Pages 必然可服务），
+  // 保证无扩展名链接、分享链接与 sitemap 抓取都能解析。standalone/dev 不受影响（避免改变 e2e 的 URL 断言）。
+  trailingSlash: isStaticExport,
   images: {
     unoptimized: isStaticExport,
   },

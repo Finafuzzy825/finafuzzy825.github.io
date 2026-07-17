@@ -1,14 +1,14 @@
 # ZGCLLM 设计系统 v2（Design Language）
 
 > 本文件为项目本地设计规范，优先级高于内置参考。锚定现有 `src/app/(frontend)/styles.css`，
-> 向 Z.ai 干净现代 + Linear/Supabase 精密暗色演进，全站中英双语、light/dark 双主题。
+> 向 Z.ai 干净现代 + Linear/Supabase 精密暗色演进，light/dark 双主题，中英双语为原型演示 + 语言切换 UI 占位（正式 i18n 后续实施，正文不切换）。
 > 落地实现由 `dev-spec-dev` 负责；本文件只定义 token 与组件语言。
 
 ## 1. 设计原则
 
 1. **商务蓝白为底**：保留品牌蓝 `#1464d2` 作锚点，向更亮的交互蓝 `#2f6bff`（Z.ai 味）过渡。
 2. **暗色为一等公民**：dark 不是反色，海军蓝 hero 压到近黑 `#05070b`，品牌蓝提亮保证对比度 ≥ 4.5:1。
-3. **中英双语层级**：section 标题 = 中文主标题 + 英文 eyebrow；正文提供 CN/EN 双份，`data-lang` 控制显隐。
+3. **中英双语层级（原型演示）**：section 标题 = 中文主标题 + 英文 eyebrow；原型正文提供 CN/EN 双份 + `data-lang` 显隐**仅为演示**。落地本轮仅保留语言切换 UI 占位，不切换正文；完整 i18n 后续实施。
 4. **克制装饰**：留白优先，卡片细描边 + 极轻阴影；深区用 glow + 细网格。
 
 ## 2. 色彩 Token（双主题）

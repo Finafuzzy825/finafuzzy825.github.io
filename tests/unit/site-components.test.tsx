@@ -34,7 +34,7 @@ describe('site application links', () => {
 
 describe('site header', () => {
   it('exposes the alliance brand, primary navigation, and the institution conversion path', () => {
-    render(<SiteHeader />)
+    render(<SiteHeader locale="zh" />)
 
     expect(screen.getAllByText('中关村自主大模型产业联盟').length).toBeGreaterThan(0)
     expect(screen.getAllByRole('link', { name: '网络安全生态' }).length).toBeGreaterThan(0)

@@ -16,6 +16,7 @@ export interface Dictionary {
   }
   header: {
     mainNav: string
+    mobileNav: string
     openNav: string
     menu: string
     institutionApply: string
@@ -54,6 +55,7 @@ const zh: Dictionary = {
     institutionApply: '机构合作申请',
     mainNav: '主导航',
     menu: '菜单',
+    mobileNav: '移动导航',
     openNav: '打开网站导航',
   },
   languageToggle: {
@@ -88,6 +90,7 @@ const en: Dictionary = {
     institutionApply: 'Partner with Us',
     mainNav: 'Main navigation',
     menu: 'Menu',
+    mobileNav: 'Mobile navigation',
     openNav: 'Open site navigation',
   },
   languageToggle: {

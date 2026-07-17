@@ -34,7 +34,7 @@ export default function GlobalNotFound(): ReactElement {
         <a className="skip-link" href="#main-content">
           跳到主要内容
         </a>
-        <SiteHeader />
+        <SiteHeader locale="zh" />
         <main className="site-container" id="main-content">
           <div className="notfound">
             <p className="eyebrow">404</p>
@@ -50,7 +50,7 @@ export default function GlobalNotFound(): ReactElement {
             </div>
           </div>
         </main>
-        <SiteFooter />
+        <SiteFooter locale="zh" />
       </body>
     </html>
   )

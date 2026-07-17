@@ -30,7 +30,7 @@ describe('home page', () => {
       '/cybersecurity',
     )
     expect(screen.getByRole('main').id).toBe('main-content')
-    expect(screen.getByRole('heading', { name: '成员信息整理中' })).toBeTruthy()
+    expect(screen.getByRole('heading', { name: '清华大学' })).toBeTruthy()
     expect(screen.getByRole('link', { name: '查看成员伙伴' }).getAttribute('href')).toBe(
       '/members',
     )

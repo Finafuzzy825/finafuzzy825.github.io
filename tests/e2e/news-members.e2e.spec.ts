@@ -1,13 +1,15 @@
 import { expect, test } from '@playwright/test'
 
 test.describe('Members and news', () => {
-  test('test_members_page_without_authorized_members_shows_empty_state', async ({ page }) => {
+  test('test_members_page_shows_published_governance_members', async ({ page }) => {
     await page.goto('/members')
 
     await expect(page).toHaveTitle(/成员伙伴/)
     await expect(page.locator('main#main-content')).toBeVisible()
     await expect(page.getByRole('heading', { level: 1, name: '成员伙伴' })).toBeVisible()
-    await expect(page.getByText('成员信息整理中')).toBeVisible()
+    // MEMBERS 已收录已公开具名的理事会/监事会单位，展示分组目录而非空态
+    await expect(page.getByRole('heading', { level: 3, name: '清华大学' })).toBeVisible()
+    await expect(page.getByText('成员信息整理中')).toHaveCount(0)
   })
 
   test('test_news_page_lists_the_published_launch_announcement', async ({ page }) => {

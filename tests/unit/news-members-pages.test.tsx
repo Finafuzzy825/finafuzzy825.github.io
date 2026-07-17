@@ -45,11 +45,19 @@ const draftEntry: NewsEntry = {
 }
 
 describe('members page', () => {
-  it('test_members_page_empty_members_renders_authorization_state', () => {
+  it('test_members_page_populated_members_renders_directory', () => {
     render(<MembersPage />)
 
     expect(screen.getByRole('main').getAttribute('id')).toBe('main-content')
     expect(screen.getByRole('heading', { level: 1, name: '成员伙伴' })).toBeTruthy()
+    // MEMBERS 已收录已公开具名的理事会/监事会单位，渲染分组目录而非空态
+    expect(screen.getByText('清华大学')).toBeTruthy()
+    expect(screen.queryByText('成员信息整理中')).toBeNull()
+  })
+
+  it('test_members_directory_empty_members_renders_authorization_state', () => {
+    render(<MembersDirectory members={[]} />)
+
     expect(screen.getByText('成员信息整理中')).toBeTruthy()
   })
 

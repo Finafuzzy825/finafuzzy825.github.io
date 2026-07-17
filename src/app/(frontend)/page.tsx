@@ -3,14 +3,14 @@ import Link from 'next/link'
 import type { ReactElement } from 'react'
 
 import { SectionHeading } from '@/components/site/section-heading'
-import { HOME_DIRECTIONS, HOME_VALUE_PROPOSITIONS } from '@/content/home'
+import { HOME_ACTION_SLOGANS, HOME_DIRECTIONS, HOME_VALUE_PROPOSITIONS } from '@/content/home'
 import { MEMBERS } from '@/content/members'
 import { getPublishedNews } from '@/content/news'
 import { SITE_NAME } from '@/config/site'
 
 export const metadata: Metadata = {
   alternates: { canonical: '/' },
-  description: '汇聚自主大模型产业力量，连接技术、场景、人才与生态资源，面向机构伙伴开展生态共建。',
+  description: '汇聚自主大模型力量，共建开放、安全、协同的产业生态，推动技术创新、产业协同、场景落地与国际合作。',
   title: { absolute: `首页｜${SITE_NAME}` },
 }
 
@@ -23,9 +23,9 @@ export default function HomePage(): ReactElement {
         <div className="container hero__inner">
           <div>
             <p className="eyebrow">{SITE_NAME}</p>
-            <h1>汇聚自主大模型产业力量，连接开放协作生态</h1>
+            <h1>汇聚自主大模型力量，共建开放、安全、协同的产业生态</h1>
             <p className="hero__lead">
-              连接基础模型厂商、科研机构、产业伙伴与专业用户，围绕真实场景推动联合创新、能力验证与产业落地。
+              中关村自主大模型产业联盟汇聚高校、科研机构与产业伙伴，围绕自主大模型推动技术创新、产业协同、场景落地与国际合作，构建开放的产业生态，并持续强化安全大模型、可信智能体与人工智能安全治理能力。
             </p>
             <div className="hero__cta">
               <Link className="btn btn--primary" href="/join">
@@ -40,11 +40,11 @@ export default function HomePage(): ReactElement {
           <div className="hero__cards">
             <div className="glass">
               <p className="glass__k">联盟定位</p>
-              <p className="glass__v">面向自主大模型产业的开放协作与生态连接平台</p>
+              <p className="glass__v">连接模型、芯片、算力、数据、平台及行业应用的自主大模型产业生态平台</p>
             </div>
             <div className="glass">
-              <p className="glass__k">重点行动</p>
-              <p className="glass__v">组织联合研究、场景共建、能力验证与成果交流</p>
+              <p className="glass__k">重点方向</p>
+              <p className="glass__v">技术创新、产业协同、场景落地与安全可信能力建设</p>
             </div>
           </div>
         </div>
@@ -53,9 +53,9 @@ export default function HomePage(): ReactElement {
       <section className="block">
         <div className="container">
           <SectionHeading
-            description="以开放连接形成协作网络，以真实需求组织联合创新，以可验证实践推动成果落地。"
+            description="以自主创新、开放协作、安全可信和产业共建为原则，连接产业各方力量。"
             eyebrow="联盟价值"
-            title="让产业力量更好地协同"
+            title="开放、安全、协同的产业生态"
           />
           <div className="grid-3">
             {HOME_VALUE_PROPOSITIONS.map((item, index) => (
@@ -72,9 +72,9 @@ export default function HomePage(): ReactElement {
       <section className="block block--subtle">
         <div className="container split">
           <SectionHeading
-            description="从技术协同到行业实践，持续连接可参与、可验证、可分享的产业议题。"
+            description="围绕自主大模型的核心技术、产业协同、场景数据、评测、安全与国际化持续推进。"
             eyebrow="重点方向"
-            title="围绕产业共同需求展开协作"
+            title="六项重点工作"
           />
           <div className="dir-list">
             {HOME_DIRECTIONS.map((direction, index) => (
@@ -89,12 +89,29 @@ export default function HomePage(): ReactElement {
 
       <section className="block">
         <div className="container">
+          <SectionHeading
+            description="以清晰的行动路径推动联盟从能力建设走向产业价值。"
+            eyebrow="行动口号"
+            title="从能力到生态的持续跃迁"
+          />
+          <div className="grid-4">
+            {HOME_ACTION_SLOGANS.map((slogan) => (
+              <article className="card" key={slogan}>
+                <b>{slogan}</b>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="block">
+        <div className="container">
           <div className="cta-band">
             <div>
-              <p className="eyebrow">重点专项</p>
+              <p className="eyebrow">安全工作组</p>
               <h2>网络安全生态</h2>
               <p>
-                连接专业用户、真实场景、深度任务与能力验证，推动不同基础模型厂商、科研机构和产业伙伴共同参与网络安全生态建设。
+                联盟下设网络安全工作组，聚焦安全大模型与网络安全智能体，连接专业用户、真实场景、深度任务与能力验证，依托工作组持续推进重点项目落地。
               </p>
             </div>
             <Link className="btn btn--primary" href="/cybersecurity">

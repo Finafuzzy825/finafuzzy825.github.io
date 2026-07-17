@@ -37,13 +37,28 @@ test.describe('site integration', () => {
     expect(hasHorizontalOverflow).toBe(false)
   })
 
-  test('desktop navigation is available at the 1024px breakpoint', async ({ page }) => {
-    // v2 断点为 900px：≥900px 显示桌面主导航，移动菜单收起。
+  test('header collapses to the mobile menu below the 1280px breakpoint', async ({ page }) => {
+    // v2 断点为 1280px：完整控件（品牌名 + 5 个中文导航 + 两条 CTA + 主题/语言 toggle）
+    // 自然宽度约 1220px，低于 1280 收起为汉堡，避免 flex 挤压导致中文换行。
     await page.setViewportSize({ width: 1024, height: 768 })
     await page.goto('/')
 
-    const desktopNav = page.getByRole('navigation', { name: '主导航' })
-    await expect(desktopNav.getByRole('link', { name: '网络安全生态' })).toBeVisible()
+    await expect(page.getByRole('navigation', { name: '主导航' })).toBeHidden()
+    const trigger = page.locator('header details.mobile-menu summary')
+    await expect(trigger).toBeVisible()
+    await trigger.click()
+    await expect(
+      page.getByRole('navigation', { name: '移动导航' }).getByRole('link', { name: '网络安全生态' }),
+    ).toBeVisible()
+  })
+
+  test('desktop navigation is shown at the 1280px breakpoint', async ({ page }) => {
+    await page.setViewportSize({ width: 1280, height: 800 })
+    await page.goto('/')
+
+    await expect(
+      page.getByRole('navigation', { name: '主导航' }).getByRole('link', { name: '网络安全生态' }),
+    ).toBeVisible()
     await expect(page.locator('header details.mobile-menu summary')).toBeHidden()
   })
 

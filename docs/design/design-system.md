@@ -50,11 +50,11 @@
 | 圆角 | 卡片 `16px`、按钮/输入/toggle `10px`、pill `999px` |
 | 区块纵向留白 | `80px`（桌面），移动 `64px` |
 | 阴影 | card `0 8px 30px rgb(7 27 55/6%)`；dark 用 shadow-as-border 高光内阴影 |
-| 断点 | 900px（三→单列、导航收汉堡）、520px（4/2 列→单列） |
+| 断点 | 内容网格 900px（三→单列）、520px（4/2 列→单列）；**header 主导航 <1280px 收汉堡**（品牌名 + 5 个中文导航 + 两条 CTA + 主题/语言 toggle 自然宽约 1220px，需 ≥1280 才不换行） |
 
 ## 5. 组件语言
 
-- **Header**：sticky + 毛玻璃；右侧 `中/EN` 分段 toggle + 日/夜 toggle + 主 CTA；≤900 收汉堡。
+- **Header**：sticky + 毛玻璃；右侧 `中/EN` 分段 toggle + 日/夜 toggle + 两条 CTA；header 容器放宽至 1320px；<1280 收汉堡（汉堡面板含导航 + CTA + toggle）。
 - **按钮**：`.btn--primary`（实心蓝）、`.btn--ghost`（描边）；高 42px，hover 上浮 1px。
 - **Hero**：深底 + 品牌蓝径向 glow + 细网格（radial mask）；右侧 glass 卡承载「定位/行动」。
 - **卡片**：白底细描边，hover 上浮 3px + 强描边；序号用渐变蓝小方块或 tabular 数字。

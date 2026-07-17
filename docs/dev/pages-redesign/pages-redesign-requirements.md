@@ -19,7 +19,7 @@
 
 ### 通用（每个页面）
 - [ ] 采用 `_design-system.css` 的 token 与组件类，视觉与原型一致；无硬编码脱离 token 的色值。
-- [ ] **响应式**：≥900 桌面 / <900 移动两套布局；导航在 <900 收起为汉堡；多列网格降为单列。
+- [ ] **响应式**：≥900 桌面 / <900 移动两套布局；页面多列网格在 900/520 降为单列；**header 主导航在 <1280 收起为汉堡**（完整控件集——品牌名 + 5 个中文导航 + 两条 CTA + 主题/语言 toggle 自然宽约 1220px，低于 1280 会被挤压换行，故整体收进汉堡）。
 - [ ] **双主题**：light/dark 均正常，切换由 `data-theme` 驱动，`prefers-color-scheme` 作首帧兜底；文本对比度 ≥ 4.5:1。
 - [ ] **语言 toggle（本轮仅 UI 占位）**：header 保留 `中/EN` 分段切换控件（含 `aria-label`），但**本轮不做完整内容双语切换**——完整中英 i18n（next-intl + 全部内容 EN 字段）延后另开 feature，待联盟确认正式英文译文后实施。控件当前可点击但暂不切换正文（或标注"即将支持"）。
 - [ ] **a11y**：保留 skip-link；当前导航项 `aria-current="page"`；主题/语言 toggle 带 `aria-label`；`focus-visible` 3px 描边；语义标签（`main/section/article/nav/time/dl`）。
@@ -65,7 +65,7 @@
 
 | 维度 | 状态 | 说明 |
 |---|---|---|
-| 响应式 | ✅ | 900/520 双断点，导航汉堡化 |
+| 响应式 | ✅ | 页面网格 900/520 双断点；header 主导航 <1280 收汉堡（控件集较宽） |
 | 主题 | ✅ | light/dark 完整，含对比度校对 |
 | 状态 | ✅ | 首页/成员/新闻 filled+empty；⚠️ loading 态跳过——纯静态展示站无异步加载 |
 | a11y | ✅ | skip-link / aria-current / aria-label / focus-visible / 语义标签 |

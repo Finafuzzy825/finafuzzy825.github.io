@@ -176,6 +176,12 @@ summary:focus-visible {
   backdrop-filter: blur(16px);
 }
 
+/* 页眉容器比正文列略宽：容纳品牌名 + 5 个中文导航 + 两条转化 CTA + 主题/语言 toggle，
+   避免在 1200px 正文列宽下被 flex 挤压换行（全套控件自然宽度约 1220px）。 */
+.site-header .site-container {
+  max-width: 1320px;
+}
+
 .brand-mark {
   align-items: center;
   background: var(--bg-hero);
@@ -197,6 +203,7 @@ summary:focus-visible {
   font-size: 14px;
   font-weight: 500;
   padding: 10px 12px;
+  white-space: nowrap;
   transition:
     background-color 160ms ease,
     color 160ms ease;
@@ -216,6 +223,7 @@ summary:focus-visible {
   font-weight: 600;
   min-height: 42px;
   padding: 10px 18px;
+  white-space: nowrap;
   transition:
     background-color 160ms ease,
     border-color 160ms ease,
@@ -470,6 +478,7 @@ summary:focus-visible {
   border-radius: var(--radius-ctrl);
   font-size: 14px;
   font-weight: 600;
+  white-space: nowrap;
   cursor: pointer;
   border: 1px solid transparent;
   transition:

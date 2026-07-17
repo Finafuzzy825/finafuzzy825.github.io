@@ -23,6 +23,10 @@ export const CYBERSECURITY_ECOSYSTEM = {
       description: '连接安全产品、企业业务、国产软件与重点行业，推动模型能力进入真实生产环境。',
       title: '产业场景',
     },
+    {
+      description: '连接模型发布渠道、行业媒体、专业社区与成果平台，推动新模型能力面向网络安全行业专业传播与落地。',
+      title: '发布与传播',
+    },
   ],
   actions: [
     {

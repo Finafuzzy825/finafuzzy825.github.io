@@ -50,7 +50,7 @@ export default function HomePage(): ReactElement {
       <section className="block">
         <div className="container">
           <SectionHeading
-            description="以自主创新、开放协作、安全可信、产业共建为原则，连接产业各方力量。"
+            description="以开放共享、安全可信、协同攻坚为支柱，连接产业各方力量。"
             eyebrow="联盟价值"
             title="开放、安全、协同的产业生态"
           />
@@ -87,8 +87,8 @@ export default function HomePage(): ReactElement {
       <section className="block">
         <div className="container">
           <SectionHeading
-            description="以清晰路径推动联盟从能力建设走向产业价值。"
-            eyebrow="行动口号"
+            description="沿清晰路径，推动联盟从能力建设走向产业价值。"
+            eyebrow="行动路径"
             title="从能力到生态的持续跃迁"
           />
           <div className="grid-4">
@@ -126,7 +126,7 @@ export default function HomePage(): ReactElement {
                 查看成员伙伴
               </Link>
             }
-            description="联盟成员信息均经公开授权后发布，携手各方共建开放、协同的产业生态。"
+            description="联盟携手各方共建开放、协同的产业生态。"
             eyebrow="生态伙伴"
             title="连接多元产业力量"
           />
@@ -187,10 +187,10 @@ export default function HomePage(): ReactElement {
         <div className="end-cta">
           <div>
             <h2>共建自主大模型产业生态</h2>
-            <p>了解联盟参与方式，携手机构伙伴共建产业生态。</p>
+            <p>诚邀机构伙伴加入联盟，携手共建开放、安全、协同的产业生态。</p>
           </div>
           <Link className="btn btn--primary" href="/join">
-            了解生态共建
+            申请成为生态伙伴
           </Link>
         </div>
       </section>

@@ -100,8 +100,8 @@ export default function AlliancePage(): ReactElement {
         <div className="site-container">
           <SectionHeading
             description="从共同议题出发，持续形成可参与、可验证、可传播的产业协作。"
-            eyebrow="发展方向"
-            title="面向长期价值持续行动"
+            eyebrow="重点方向"
+            title="把共同议题转化为持续行动"
           />
           <div className="grid-2">
             {ALLIANCE_DIRECTIONS.map(([title, description]) => (
@@ -118,10 +118,10 @@ export default function AlliancePage(): ReactElement {
         <div className="end-cta">
           <div>
             <h2>联系与参与</h2>
-            <p>欢迎产业、科研与生态伙伴参与联盟共建，可先了解机构生态共建的参与方式。</p>
+            <p>欢迎产业、科研与生态伙伴加入联盟，携手共建自主大模型产业生态。</p>
           </div>
           <Link className="button-primary" href="/join">
-            查看生态共建方式
+            申请成为生态伙伴
           </Link>
         </div>
       </section>

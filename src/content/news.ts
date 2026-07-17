@@ -72,7 +72,7 @@ export const NEWS_ENTRIES: readonly NewsEntry[] = [
         type: 'list',
       },
       {
-        text: '联盟坚持只发布经确认可公开的信息，成员与阶段成果内容将在完成公开授权确认后陆续更新。',
+        text: '联盟持续发布经确认可公开的信息，成员与阶段成果内容将在完成公开授权后陆续更新。',
         type: 'paragraph',
       },
       {

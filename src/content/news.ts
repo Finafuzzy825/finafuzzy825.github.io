@@ -9,7 +9,7 @@ export const NEWS_ENTRIES: readonly NewsEntry[] = [
         type: 'paragraph',
       },
       {
-        text: '联盟希望帮助可信安全伙伴在合法授权与防御优先的前提下，提升漏洞挖掘、代码审计、补丁验证、安全测试、代码修复与安全研发效率，让先进大模型能力真正服务于网络安全防御体系建设。智谱提供模型能力与技术支持，联盟伙伴负责使用场景合规、目标授权、结果复核与漏洞处置。',
+        text: '联盟希望帮助可信安全伙伴在合法授权与防御优先的前提下，提升漏洞挖掘、代码审计、补丁验证、安全测试、代码修复与安全研发效率，让先进大模型能力真正服务于网络安全防御体系建设。由联盟成员模型厂商提供模型能力与技术支持，联盟伙伴负责使用场景合规、目标授权、结果复核与漏洞处置。',
         type: 'paragraph',
       },
       { text: '开放对象', type: 'heading' },
@@ -48,7 +48,7 @@ export const NEWS_ENTRIES: readonly NewsEntry[] = [
     category: 'news',
     ctaHref: 'https://clouditera.feishu.cn/share/base/form/shrcnXSRHvrWPehplPdvFuB0juc',
     ctaLabel: '填写申请',
-    date: '2026-07-17',
+    date: '2026-07-03',
     description:
       '中关村自主大模型产业联盟发起“网络安全人员开放计划”，面向可信防御者受控开放自主大模型在网络安全场景的能力，坚持合法授权、防御优先、过程可审计。',
     published: true,

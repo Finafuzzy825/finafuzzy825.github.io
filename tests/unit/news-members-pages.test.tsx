@@ -97,11 +97,19 @@ describe('members page', () => {
 })
 
 describe('news list page', () => {
-  it('test_news_page_empty_news_renders_honest_state', () => {
+  it('renders the published inaugural launch announcement', () => {
     render(<NewsPage />)
 
     expect(screen.getByRole('main').getAttribute('id')).toBe('main-content')
     expect(screen.getByRole('heading', { level: 1, name: '新闻动态' })).toBeTruthy()
+    expect(screen.getByRole('link', { name: '联盟官方网站正式上线' }).getAttribute('href')).toBe(
+      '/news/alliance-website-launch',
+    )
+  })
+
+  it('test_news_page_empty_news_renders_honest_state', () => {
+    render(<NewsList entries={[]} />)
+
     expect(screen.getByText('最新动态即将发布')).toBeTruthy()
   })
 

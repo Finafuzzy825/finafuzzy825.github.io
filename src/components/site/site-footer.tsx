@@ -28,10 +28,6 @@ export function SiteFooter(): ReactElement {
               生态共建
               <br />
             </Link>
-            <Link href="/professionals">
-              专业用户
-              <br />
-            </Link>
             <Link href="/members">成员伙伴</Link>
           </div>
           <div>

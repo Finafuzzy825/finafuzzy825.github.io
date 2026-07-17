@@ -10,13 +10,15 @@ test.describe('Members and news', () => {
     await expect(page.getByText('成员信息整理中')).toBeVisible()
   })
 
-  test('test_news_page_without_published_entries_shows_empty_state', async ({ page }) => {
+  test('test_news_page_lists_the_published_launch_announcement', async ({ page }) => {
     await page.goto('/news')
 
     await expect(page).toHaveTitle(/新闻动态/)
     await expect(page.locator('main#main-content')).toBeVisible()
     await expect(page.getByRole('heading', { level: 1, name: '新闻动态' })).toBeVisible()
-    await expect(page.getByText('最新动态即将发布')).toBeVisible()
+    await expect(
+      page.getByRole('link', { name: '联盟官方网站正式上线' }).first(),
+    ).toHaveAttribute('href', '/news/alliance-website-launch')
   })
 
   test('test_news_detail_unknown_slug_returns_site_not_found', async ({ page }) => {

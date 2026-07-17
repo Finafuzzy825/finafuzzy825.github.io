@@ -79,7 +79,7 @@ test.describe('网络安全生态专题', () => {
     await expect(main.getByText('不被强制交付原始数据', { exact: false })).toBeVisible()
   })
 
-  test('收尾 CTA 保持厂商中立并提供主次参与入口', async ({ page }) => {
+  test('收尾 CTA 保持厂商中立并提供机构参与入口', async ({ page }) => {
     const main = page.locator('main#main-content')
 
     await expect(
@@ -88,11 +88,9 @@ test.describe('网络安全生态专题', () => {
     await expect(main.getByText('厂商中立', { exact: true })).toBeVisible()
 
     const institutionCta = main.getByRole('link', { name: '机构合作申请' }).last()
-    const professionalCta = main.getByRole('link', { name: '个人专业用户加入' }).last()
 
     await expect(institutionCta).toHaveAttribute('href', '/join')
     await expect(institutionCta).toHaveClass(/btn--primary/)
-    await expect(professionalCta).toHaveAttribute('href', '/professionals')
-    await expect(professionalCta).toHaveClass(/btn--ghost/)
+    await expect(main.getByRole('link', { name: '个人专业用户加入' })).toHaveCount(0)
   })
 })

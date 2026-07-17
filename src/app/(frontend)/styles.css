@@ -196,6 +196,14 @@ summary:focus-visible {
   width: 40px;
 }
 
+.brand-logo {
+  border-radius: 10px;
+  flex: 0 0 auto;
+  height: 40px;
+  object-fit: contain;
+  width: 40px;
+}
+
 .site-nav-link {
   border-radius: 8px;
   color: var(--text-body);

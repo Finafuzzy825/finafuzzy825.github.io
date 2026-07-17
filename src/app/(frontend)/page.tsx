@@ -31,9 +31,6 @@ export default function HomePage(): ReactElement {
               <Link className="btn btn--primary" href="/join">
                 机构合作申请
               </Link>
-              <Link className="btn btn--ghost" href="/professionals">
-                个人专业用户加入
-              </Link>
             </div>
           </div>
 
@@ -190,7 +187,7 @@ export default function HomePage(): ReactElement {
         <div className="end-cta">
           <div>
             <h2>共建自主大模型产业生态</h2>
-            <p>了解联盟参与方式，选择适合机构或专业用户的参与路径。</p>
+            <p>了解联盟参与方式，携手机构伙伴推动自主大模型产业生态共建。</p>
           </div>
           <Link className="btn btn--primary" href="/join">
             了解生态共建

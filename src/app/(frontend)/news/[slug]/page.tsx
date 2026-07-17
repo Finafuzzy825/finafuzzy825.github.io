@@ -11,6 +11,10 @@ interface NewsDetailPageProps {
   params: Promise<{ slug: string }>
 }
 
+// 仅预渲染 generateStaticParams 返回的 slug；未知 slug 一律 404。
+// 静态导出（output: export）要求路由无运行时渲染需求，新闻为空时也能正常导出。
+export const dynamicParams = false
+
 interface NewsArticleProps {
   entry: NewsEntry
 }

@@ -3,7 +3,7 @@ export interface NavigationItem {
   label: string
 }
 
-export type ApplicationKind = 'institution' | 'professional'
+export type ApplicationKind = 'institution'
 
 export interface ExternalApplicationTarget {
   href?: string

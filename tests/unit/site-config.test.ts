@@ -25,14 +25,13 @@ describe('site configuration', () => {
     expect(new Set(destinations).size).toBe(destinations.length)
     expect(PUBLIC_STATIC_ROUTES).toContain('/privacy')
     expect(PUBLIC_STATIC_ROUTES).not.toContain('/admin')
+    expect(PUBLIC_STATIC_ROUTES).not.toContain('/professionals')
   })
 
-  it('keeps institution and professional applications as separate targets', () => {
+  it('keeps institution as the sole application target after retiring professionals', () => {
     expect(APPLICATION_TARGETS.institution.internalHref).toBe('/join')
-    expect(APPLICATION_TARGETS.professional.internalHref).toBe('/professionals')
-    expect(APPLICATION_TARGETS.institution.label).not.toBe(
-      APPLICATION_TARGETS.professional.label,
-    )
+    expect(APPLICATION_TARGETS.institution.label).toBe('机构合作申请')
+    expect(APPLICATION_TARGETS).not.toHaveProperty('professional')
   })
 
   it.each([

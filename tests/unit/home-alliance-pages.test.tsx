@@ -21,12 +21,11 @@ describe('home page', () => {
     ).toBeTruthy()
 
     const institutionLink = screen.getByRole('link', { name: '机构合作申请' })
-    const professionalLink = screen.getByRole('link', { name: '个人专业用户加入' })
 
     expect(institutionLink.getAttribute('href')).toBe('/join')
     expect(institutionLink.className).toContain('btn--primary')
-    expect(professionalLink.getAttribute('href')).toBe('/professionals')
-    expect(professionalLink.className).toContain('btn--ghost')
+    expect(screen.queryByRole('link', { name: '个人专业用户加入' })).toBeNull()
+    expect(document.body.textContent).not.toMatch(/\/professionals/)
     expect(screen.getByRole('link', { name: /了解网络安全生态/ }).getAttribute('href')).toBe(
       '/cybersecurity',
     )
@@ -35,7 +34,9 @@ describe('home page', () => {
     expect(screen.getByRole('link', { name: '查看成员伙伴' }).getAttribute('href')).toBe(
       '/members',
     )
-    expect(screen.getByRole('heading', { name: '最新动态即将发布' })).toBeTruthy()
+    expect(
+      screen.getByRole('link', { name: '联盟官方网站正式上线' }).getAttribute('href'),
+    ).toBe('/news/alliance-website-launch')
     expect(screen.getByRole('link', { name: '查看新闻动态' }).getAttribute('href')).toBe('/news')
     expect(document.body.textContent).not.toMatch(/项目初始化|进入内容后台|管理后台/)
   })

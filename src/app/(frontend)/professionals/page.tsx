@@ -38,11 +38,11 @@ export default function ProfessionalsPage(): ReactElement {
       <PageHero
         actions={
           <ExternalApplicationLink className="button-primary" kind="professional">
-            专业用户加入
+            个人专业用户加入
           </ExternalApplicationLink>
         }
         description={PAGE_DESCRIPTION}
-        eyebrow="PROFESSIONAL COMMUNITY"
+        eyebrow="专业用户社区"
         title="专业用户加入"
       />
 
@@ -50,7 +50,7 @@ export default function ProfessionalsPage(): ReactElement {
         <div className="site-container">
           <SectionHeading
             description="无论来自技术、研究、产业还是应用一线，都可以基于真实经验参与开放交流。"
-            eyebrow="WHO CAN JOIN"
+            eyebrow="参与对象"
             title="适用人群"
           />
           <div className="grid-3">
@@ -68,7 +68,7 @@ export default function ProfessionalsPage(): ReactElement {
         <div className="site-container">
           <SectionHeading
             description="参与内容取决于公开计划、议题需求和必要的授权边界。"
-            eyebrow="WAYS TO PARTICIPATE"
+            eyebrow="参与路径"
             title="参与方式"
           />
           <div className="grid-3">
@@ -86,7 +86,7 @@ export default function ProfessionalsPage(): ReactElement {
         <div className="site-container">
           <SectionHeading
             description="联盟提供专业连接和公开参与机会，具体安排以各项活动或专项说明为准。"
-            eyebrow="PARTICIPANT BENEFITS"
+            eyebrow="权益说明"
             title="参与权益"
           />
           <ol className="dir-list" style={{ gridTemplateColumns: '1fr' }}>

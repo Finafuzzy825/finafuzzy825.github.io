@@ -53,13 +53,13 @@ export const APPLICATION_TARGETS: Readonly<Record<ApplicationKind, ExternalAppli
   institution: {
     href: process.env.NEXT_PUBLIC_INSTITUTION_APPLICATION_URL,
     internalHref: '/join',
-    label: '申请生态共建',
+    label: '机构合作申请',
     unavailableMessage: '申请通道准备中，请通过官网联系方式与联盟联系。',
   },
   professional: {
     href: process.env.NEXT_PUBLIC_PROFESSIONAL_APPLICATION_URL,
     internalHref: '/professionals',
-    label: '专业用户加入',
+    label: '个人专业用户加入',
     unavailableMessage: '申请通道准备中，请通过官网联系方式与联盟联系。',
   },
 } as const

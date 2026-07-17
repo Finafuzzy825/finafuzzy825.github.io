@@ -15,13 +15,13 @@ export const metadata: Metadata = {
 export default function PrivacyPage(): ReactElement {
   return (
     <main id="main-content">
-      <PageHero description={PAGE_DESCRIPTION} eyebrow="PRIVACY" title="隐私说明" />
+      <PageHero description={PAGE_DESCRIPTION} eyebrow="隐私保护" title="隐私说明" />
 
       <section className="block">
         <div className="site-container">
           <SectionHeading
             description="申请入口会将访客带到联盟配置的外部表单，本页帮助您理解跳转前后的边界。"
-            eyebrow="DATA BOUNDARY"
+            eyebrow="数据边界"
             title="申请数据边界"
           />
           <div className="grid-2">
@@ -39,7 +39,7 @@ export default function PrivacyPage(): ReactElement {
 
       <section className="block block--subtle">
         <div className="site-container">
-          <SectionHeading eyebrow="BEFORE SUBMITTING" title="提交前请确认" />
+          <SectionHeading eyebrow="提交前须知" title="提交前请确认" />
           <div className="prose">
             <p>
               外部表单可能说明收集字段、使用目的、保存安排及联系渠道。请在提交前阅读相关说明，并以表单内的隐私告知为准；本页不替代该告知。
@@ -52,7 +52,7 @@ export default function PrivacyPage(): ReactElement {
         <div className="site-container">
           <SectionHeading
             description="如对官网隐私边界或外部申请入口有疑问，请通过官网公布的联盟联系方式咨询；正式联系信息将在发布前补充。"
-            eyebrow="CONTACT"
+            eyebrow="联系我们"
             title="联系联盟"
           />
         </div>

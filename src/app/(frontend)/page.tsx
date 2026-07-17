@@ -29,10 +29,10 @@ export default function HomePage(): ReactElement {
             </p>
             <div className="hero__cta">
               <Link className="btn btn--primary" href="/join">
-                申请生态共建
+                机构合作申请
               </Link>
               <Link className="btn btn--ghost" href="/professionals">
-                专业用户加入
+                个人专业用户加入
               </Link>
             </div>
           </div>
@@ -43,7 +43,7 @@ export default function HomePage(): ReactElement {
               <p className="glass__v">连接模型、芯片、算力、数据、平台及行业应用的自主大模型产业生态平台</p>
             </div>
             <div className="glass">
-              <p className="glass__k">重点方向</p>
+              <p className="glass__k">核心议题</p>
               <p className="glass__v">技术创新、产业协同、场景落地与安全可信能力建设</p>
             </div>
           </div>

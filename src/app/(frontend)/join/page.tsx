@@ -9,7 +9,7 @@ const PAGE_DESCRIPTION =
   '了解机构参与联盟生态共建的合作价值、参与方式、协作流程与常见问题。'
 
 const VALUES = [
-  ['产业连接', '连接基础模型厂商、科研机构、产业伙伴与真实应用场景，促进跨领域协作。'],
+  ['产业连接', '连接模型、芯片、算力、数据、平台及行业应用力量与科研机构、产业伙伴，促进跨领域协作。'],
   ['联合创新', '围绕明确议题组织交流、研究、验证与成果传播，汇聚互补能力。'],
   ['生态共创', '在开放、厂商中立与合规治理的边界内，共建可持续的产业生态。'],
 ] as const
@@ -27,7 +27,7 @@ const PROCESS = [
 ] as const
 
 const FAQ = [
-  ['哪些机构可以参与？', '欢迎基础模型厂商、产业企业、高校、科研机构及相关生态伙伴表达合作意向。'],
+  ['哪些机构可以参与？', '欢迎模型、芯片、算力、数据、平台及行业应用等产业伙伴，以及高校、科研机构表达合作意向。'],
   ['提交意向是否代表正式加入？', '不代表。表单用于建立联系，具体合作安排以双方后续确认的信息为准。'],
   ['申请通道暂不可用怎么办？', '页面会显示联系提示；正式联系信息将在官网发布前补充。'],
 ] as const
@@ -44,11 +44,11 @@ export default function JoinPage(): ReactElement {
       <PageHero
         actions={
           <ExternalApplicationLink className="button-primary" kind="institution">
-            申请生态共建
+            机构合作申请
           </ExternalApplicationLink>
         }
         description={PAGE_DESCRIPTION}
-        eyebrow="INSTITUTIONAL PARTNERSHIP"
+        eyebrow="机构参与"
         title="机构生态共建"
       />
 
@@ -56,7 +56,7 @@ export default function JoinPage(): ReactElement {
         <div className="site-container">
           <SectionHeading
             description="让机构能力与产业议题、真实场景和生态伙伴形成长期连接。"
-            eyebrow="WHY PARTICIPATE"
+            eyebrow="参与价值"
             title="共建价值"
           />
           <div className="grid-3">
@@ -74,7 +74,7 @@ export default function JoinPage(): ReactElement {
         <div className="site-container">
           <SectionHeading
             description="可根据机构定位、专业能力与资源条件选择合适的协作切入点。"
-            eyebrow="WAYS TO CONTRIBUTE"
+            eyebrow="参与路径"
             title="参与方式"
           />
           <div className="grid-3">
@@ -92,13 +92,13 @@ export default function JoinPage(): ReactElement {
         <div className="site-container">
           <SectionHeading
             description="申请入口承接合作意向，后续协作以双方确认的目标与边界为准。"
-            eyebrow="COLLABORATION PROCESS"
+            eyebrow="协作流程"
             title="参与流程"
           />
           <ol className="grid-3">
             {PROCESS.map(([title, description], index) => (
               <li className="card" key={title}>
-                <p className="eyebrow">STEP {String(index + 1).padStart(2, '0')}</p>
+                <p className="eyebrow">步骤 {String(index + 1).padStart(2, '0')}</p>
                 <h3>{title}</h3>
                 <p>{description}</p>
               </li>
@@ -109,7 +109,7 @@ export default function JoinPage(): ReactElement {
 
       <section className="block block--subtle">
         <div className="site-container">
-          <SectionHeading eyebrow="FAQ" title="常见问题" />
+          <SectionHeading eyebrow="问题解答" title="常见问题" />
           <div className="grid-3">
             {FAQ.map(([question, answer]) => (
               <article className="card" key={question}>

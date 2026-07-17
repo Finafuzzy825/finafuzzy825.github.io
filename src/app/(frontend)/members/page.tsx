@@ -91,7 +91,7 @@ export default function MembersPage(): ReactElement {
     <main id="main-content">
       <PageHero
         description="在获得公开授权的前提下，展示参与联盟建设的产业、科研与生态协作力量。"
-        eyebrow="MEMBERS & PARTNERS"
+        eyebrow="生态伙伴"
         title="成员伙伴"
       />
       <MembersDirectory members={MEMBERS} />

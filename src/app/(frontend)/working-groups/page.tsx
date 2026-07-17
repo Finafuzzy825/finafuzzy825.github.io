@@ -24,8 +24,8 @@ export default function WorkingGroupsPage(): ReactElement {
       <section className="block">
         <div className="site-container">
           <SectionHeading
-            description="以下仅展示已经确认并可公开的重点专项；其余方向将在信息确认后陆续发布。"
-            eyebrow="公开专项"
+            description="以下仅展示已经确认并可公开的工作组；其余方向将在信息确认后陆续发布。"
+            eyebrow="公开工作组"
             title="聚焦真实议题，形成持续协作"
           />
 

@@ -32,7 +32,7 @@ export const CYBERSECURITY_ECOSYSTEM = {
     {
       description:
         '作为专业用户入口，将一次性权益活动升级为长期用户网络：申请审核、权益发放、需求收集、分层运营与优秀案例沉淀。',
-      title: '持续运营网络安全专业用户开放计划',
+      title: '持续运营网络安全人员开放计划',
     },
     {
       description:

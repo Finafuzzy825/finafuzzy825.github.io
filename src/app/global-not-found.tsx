@@ -22,11 +22,11 @@ export default function GlobalNotFound(): ReactElement {
           首帧无闪烁主题脚本：与 (frontend)/layout.tsx 保持一致。
           global-not-found 是独立 HTML 页，不经过分组 layout，需自带脚本，
           否则未知路由 404 页无法应用 data-theme（深色失效）。
-          key 字面量须与 src/config/site.ts 的 THEME_STORAGE_KEY 一致（内联脚本无法 import）。
+          主题跟随系统 prefers-color-scheme，并清理历史遗留的 localStorage['zgcllm-theme']。
         */}
         <script
           dangerouslySetInnerHTML={{
-            __html: `(function(){try{var t=localStorage.getItem('zgcllm-theme');if(t!=='light'&&t!=='dark'){t=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'}document.documentElement.dataset.theme=t}catch(e){document.documentElement.dataset.theme=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'}})();`,
+            __html: `(function(){try{localStorage.removeItem('zgcllm-theme')}catch(e){}document.documentElement.dataset.theme=(window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches)?'dark':'light'})();`,
           }}
         />
       </head>

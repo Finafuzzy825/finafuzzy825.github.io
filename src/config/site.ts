@@ -128,7 +128,7 @@ export const CORE_MODULES: readonly CoreModule[] = [
     title: '工作组成员',
   },
   {
-    description: '提供加入工作组的申请说明，跳转至外部飞书表单完成提交，站内不提供后台审核流转。',
+    description: '提供加入工作组的申请说明，跳转至外部飞书表单完成提交，站内不做流程跟踪与审批留痕。',
     path: '/working-groups/[slug]/join',
     slug: 'working-group-application',
     title: '加入工作组',

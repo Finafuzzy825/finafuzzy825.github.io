@@ -1,12 +1,15 @@
 import type { Metadata } from 'next'
+import type { ReactElement } from 'react'
 
-import { metadata as zhMetadata } from '@/app/(frontend)/working-groups/page'
+import { WorkingGroupsListView } from '@/app/(frontend)/working-groups/page'
 import { buildAlternates } from '@/i18n/routing'
 
-// 英文薄壳：复用中文页组件（正文本轮回退中文），仅覆写 hreflang/canonical 为 en。
 export const metadata: Metadata = {
-  ...zhMetadata,
   alternates: buildAlternates('/working-groups', 'en'),
+  description: 'Learn about the Alliance working groups, public collaboration directions and ways to join.',
+  title: 'Working Groups',
 }
 
-export { default } from '@/app/(frontend)/working-groups/page'
+export default function EnWorkingGroupsPage(): ReactElement {
+  return <WorkingGroupsListView locale="en" />
+}

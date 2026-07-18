@@ -1,24 +1,33 @@
 import type { Metadata } from 'next'
+import { notFound } from 'next/navigation'
+import type { ReactElement } from 'react'
 
-import { generateMetadata as zhGenerateMetadata } from '@/app/(frontend)/working-groups/[slug]/page'
-import { buildAlternates } from '@/i18n/routing'
+import {
+  createWorkingGroupMetadata,
+  generateStaticParams,
+  WorkingGroupOverviewView,
+} from '@/app/(frontend)/working-groups/[slug]/page'
+import { getWorkingGroupBySlug } from '@/content/working-groups'
 
 interface EnPageProps {
   params: Promise<{ slug: string }>
 }
 
-// dynamicParams 为路由段配置值，须静态声明（不可 re-export）。
 export const dynamicParams = false
 
-export { default, generateStaticParams } from '@/app/(frontend)/working-groups/[slug]/page'
+export { generateStaticParams }
 
-// 复用中文页元数据构建，仅把 canonical/hreflang 覆写为 en 对应 URL。
-export async function generateMetadata(props: EnPageProps): Promise<Metadata> {
-  const base = await zhGenerateMetadata(props)
-  const { slug } = await props.params
+export async function generateMetadata({ params }: EnPageProps): Promise<Metadata> {
+  const { slug } = await params
+  const group = getWorkingGroupBySlug(slug)
 
-  return {
-    ...base,
-    alternates: buildAlternates(`/working-groups/${slug}`, 'en'),
-  }
+  if (!group) notFound()
+
+  return createWorkingGroupMetadata(group, 'en')
+}
+
+export default async function EnWorkingGroupPage({ params }: EnPageProps): Promise<ReactElement> {
+  const { slug } = await params
+
+  return <WorkingGroupOverviewView locale="en" slug={slug} />
 }

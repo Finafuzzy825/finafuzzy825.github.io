@@ -1,39 +1,77 @@
 import Image from 'next/image'
-import { buildAlternates } from '@/i18n/routing'
 import Link from 'next/link'
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import type { ReactElement } from 'react'
 
 import { PageHero } from '@/components/site/page-hero'
-import { getWorkingGroupBySlug, getWorkingGroupSlugs } from '@/content/working-groups'
 import { getWorkingGroupMembers } from '@/content/working-group-members'
+import {
+  getWorkingGroupBySlug,
+  getWorkingGroupSlugs,
+  localizeWorkingGroup,
+} from '@/content/working-groups'
+import type { Locale } from '@/i18n/locales'
+import { buildAlternates, localizePath } from '@/i18n/routing'
 import type { WorkingGroupMember, WorkingGroupSummary } from '@/types/content'
 
 interface WorkingGroupMembersPageProps {
   params: Promise<{ slug: string }>
 }
 
-// 仅预渲染 generateStaticParams 返回的 slug；未知 slug 一律 404。
 export const dynamicParams = false
 
 export function generateStaticParams(): { slug: string }[] {
   return getWorkingGroupSlugs().map((slug) => ({ slug }))
 }
 
-export function createWorkingGroupMembersMetadata(group: WorkingGroupSummary): Metadata {
-  const description = `查看${group.title}的公开授权成员名单。`
+const STRINGS: Record<Locale, {
+  pageTitle: string
+  descriptionFor: (title: string) => string
+  ogTitleSuffix: string
+  emptyTitle: string
+  emptyBody: string
+  emptyCta: string
+  logoAltSuffix: string
+}> = {
+  en: {
+    descriptionFor: (title) => `View the publicly authorized member list of the ${title}.`,
+    emptyBody: 'More members will be disclosed after public authorization. Please stay tuned.',
+    emptyCta: 'Apply to join this working group',
+    emptyTitle: 'Member list is being prepared',
+    logoAltSuffix: ' logo',
+    ogTitleSuffix: ' · Member List',
+    pageTitle: 'Member List',
+  },
+  zh: {
+    descriptionFor: (title) => `查看${title}的公开授权成员名单。`,
+    emptyBody: '更多成员名单将在获得公开授权后陆续公开，敬请关注。',
+    emptyCta: '申请加入本工作组',
+    emptyTitle: '成员名单整理中',
+    logoAltSuffix: '标识',
+    ogTitleSuffix: ' · 成员名单',
+    pageTitle: '成员名单',
+  },
+}
+
+export function createWorkingGroupMembersMetadata(
+  group: WorkingGroupSummary,
+  locale: Locale = 'zh',
+): Metadata {
+  const localized = localizeWorkingGroup(group, locale)
+  const t = STRINGS[locale]
+  const description = t.descriptionFor(localized.title)
 
   return {
-    alternates: buildAlternates(`/working-groups/${group.slug}/members`, 'zh'),
+    alternates: buildAlternates(`/working-groups/${group.slug}/members`, locale),
     description,
     openGraph: {
       description,
-      title: `${group.title} · 成员名单`,
+      title: `${localized.title}${t.ogTitleSuffix}`,
       type: 'website',
-      url: `/working-groups/${group.slug}/members`,
+      url: localizePath(`/working-groups/${group.slug}/members`, locale),
     },
-    title: `${group.title} · 成员名单`,
+    title: `${localized.title}${t.ogTitleSuffix}`,
   }
 }
 
@@ -51,21 +89,28 @@ export async function generateMetadata({
 interface WorkingGroupMembersDirectoryProps {
   group: WorkingGroupSummary
   members: readonly WorkingGroupMember[]
+  locale?: Locale
 }
 
 export function WorkingGroupMembersDirectory({
   group,
   members,
+  locale = 'zh',
 }: WorkingGroupMembersDirectoryProps): ReactElement {
+  const t = STRINGS[locale]
+
   if (members.length === 0) {
     return (
       <section className="block">
         <div className="site-container">
           <div className="empty">
-            <h3>成员名单整理中</h3>
-            <p>更多成员名单将在获得公开授权后陆续公开，敬请关注。</p>
-            <Link className="btn btn--primary" href={`/working-groups/${group.slug}/join`}>
-              申请加入本工作组
+            <h3>{t.emptyTitle}</h3>
+            <p>{t.emptyBody}</p>
+            <Link
+              className="btn btn--primary"
+              href={localizePath(`/working-groups/${group.slug}/join`, locale)}
+            >
+              {t.emptyCta}
             </Link>
           </div>
         </div>
@@ -82,7 +127,7 @@ export function WorkingGroupMembersDirectory({
               {member.logo ? (
                 <div className="logo-tile">
                   <Image
-                    alt={`${member.name}标识`}
+                    alt={`${member.name}${t.logoAltSuffix}`}
                     className="max-h-14 w-auto object-contain"
                     height={56}
                     src={member.logo}
@@ -101,6 +146,33 @@ export function WorkingGroupMembersDirectory({
   )
 }
 
+export function WorkingGroupMembersView({
+  slug,
+  locale,
+}: {
+  slug: string
+  locale: Locale
+}): ReactElement {
+  const group = getWorkingGroupBySlug(slug)
+
+  if (!group) notFound()
+
+  const localized = localizeWorkingGroup(group, locale)
+  const t = STRINGS[locale]
+  const members = getWorkingGroupMembers(slug)
+
+  return (
+    <main id="main-content">
+      <PageHero
+        description={t.descriptionFor(localized.title)}
+        eyebrow={localized.title}
+        title={t.pageTitle}
+      />
+      <WorkingGroupMembersDirectory group={group} locale={locale} members={members} />
+    </main>
+  )
+}
+
 export default async function WorkingGroupMembersPage({
   params,
 }: WorkingGroupMembersPageProps): Promise<ReactElement> {
@@ -109,16 +181,5 @@ export default async function WorkingGroupMembersPage({
 
   if (!group) notFound()
 
-  const members = getWorkingGroupMembers(slug)
-
-  return (
-    <main id="main-content">
-      <PageHero
-        description={`查看${group.title}的公开授权成员名单。`}
-        eyebrow={group.title}
-        title="成员名单"
-      />
-      <WorkingGroupMembersDirectory group={group} members={members} />
-    </main>
-  )
+  return <WorkingGroupMembersView locale="zh" slug={slug} />
 }

@@ -1,12 +1,16 @@
 import type { Metadata } from 'next'
+import type { ReactElement } from 'react'
 
-import { metadata as zhMetadata } from '@/app/(frontend)/privacy/page'
+import { PrivacyView } from '@/components/pages/privacy-view'
 import { buildAlternates } from '@/i18n/routing'
 
-// 英文薄壳：复用中文页组件（正文本轮回退中文），仅覆写 hreflang/canonical 为 en。
 export const metadata: Metadata = {
-  ...zhMetadata,
   alternates: buildAlternates('/privacy', 'en'),
+  description:
+    'Understand how your information and privacy are handled and protected when submitting a partnership application on this site.',
+  title: 'Privacy Notice',
 }
 
-export { default } from '@/app/(frontend)/privacy/page'
+export default function EnPrivacyPage(): ReactElement {
+  return <PrivacyView locale="en" />
+}

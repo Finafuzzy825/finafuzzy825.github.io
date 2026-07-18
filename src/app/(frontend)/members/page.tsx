@@ -1,13 +1,10 @@
-import Image from 'next/image'
-import { buildAlternates } from '@/i18n/routing'
-import Link from 'next/link'
 import type { Metadata } from 'next'
 import type { ReactElement } from 'react'
 
-import { PageHero } from '@/components/site/page-hero'
-import { SectionHeading } from '@/components/site/section-heading'
-import { MEMBERS } from '@/content/members'
-import type { MemberSummary } from '@/types/content'
+import { MembersDirectory, MembersView } from '@/components/pages/members-view'
+import { buildAlternates } from '@/i18n/routing'
+
+export { MembersDirectory }
 
 export const metadata: Metadata = {
   alternates: buildAlternates('/members', 'zh'),
@@ -15,87 +12,6 @@ export const metadata: Metadata = {
   title: '成员伙伴',
 }
 
-const MEMBER_GROUPS: readonly {
-  description: string
-  label: string
-  type: MemberSummary['type']
-}[] = [
-  { description: '参与联盟发起与长期建设的成员单位。', label: '发起成员', type: 'founding' },
-  { description: '参与产业协作与场景共建的机构成员。', label: '机构成员', type: 'institution' },
-  { description: '参与研究、人才与技术交流的科研伙伴。', label: '科研伙伴', type: 'research' },
-  { description: '共同连接技术、服务与产业资源的生态伙伴。', label: '生态伙伴', type: 'ecosystem' },
-] as const
-
-interface MembersDirectoryProps {
-  members: readonly MemberSummary[]
-}
-
-export function MembersDirectory({ members }: MembersDirectoryProps): ReactElement {
-  if (members.length === 0) {
-    return (
-      <section className="block">
-        <div className="site-container">
-          <div className="empty">
-            <h3>成员信息整理中</h3>
-            <p>更多成员名称与标识将在完成公开授权后陆续发布，敬请关注。</p>
-            <Link className="btn btn--primary" href="/join">
-              申请成为生态伙伴
-            </Link>
-          </div>
-        </div>
-      </section>
-    )
-  }
-
-  return (
-    <>
-      {MEMBER_GROUPS.map((group) => ({
-        group,
-        groupMembers: members.filter((member) => member.type === group.type),
-      }))
-        .filter(({ groupMembers }) => groupMembers.length > 0)
-        .map(({ group, groupMembers }, renderIndex) => (
-          <section
-            className={renderIndex % 2 === 1 ? 'block block--subtle' : 'block'}
-            key={group.type}
-          >
-            <div className="site-container">
-              <SectionHeading description={group.description} title={group.label} />
-              <div className="grid-3">
-                {groupMembers.map((member) => (
-                  <article className="card min-w-0" key={member.id}>
-                    {member.logo ? (
-                      <div className="logo-tile">
-                        <Image
-                          alt={`${member.name}标识`}
-                          className="max-h-14 w-auto object-contain"
-                          height={56}
-                          src={member.logo}
-                          width={180}
-                        />
-                      </div>
-                    ) : null}
-                    <h3>{member.name}</h3>
-                    {member.description ? <p>{member.description}</p> : null}
-                  </article>
-                ))}
-              </div>
-            </div>
-          </section>
-        ))}
-    </>
-  )
-}
-
 export default function MembersPage(): ReactElement {
-  return (
-    <main id="main-content">
-      <PageHero
-        description="联盟现有 32 家单位会员。以下为已公开的理事会与监事会成员单位，更多成员将在获得授权后陆续公开。"
-        eyebrow="生态伙伴"
-        title="成员伙伴"
-      />
-      <MembersDirectory members={MEMBERS} />
-    </main>
-  )
+  return <MembersView locale="zh" />
 }

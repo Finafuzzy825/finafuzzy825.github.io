@@ -1,12 +1,16 @@
 import type { Metadata } from 'next'
+import type { ReactElement } from 'react'
 
-import { metadata as zhMetadata } from '@/app/(frontend)/members/page'
+import { MembersView } from '@/components/pages/members-view'
 import { buildAlternates } from '@/i18n/routing'
 
-// 英文薄壳：复用中文页组件（正文本轮回退中文），仅覆写 hreflang/canonical 为 en。
 export const metadata: Metadata = {
-  ...zhMetadata,
   alternates: buildAlternates('/members', 'en'),
+  description:
+    'Publicly authorized Alliance members and ecosystem partners, connecting industry, research and ecosystem collaboration.',
+  title: 'Members',
 }
 
-export { default } from '@/app/(frontend)/members/page'
+export default function EnMembersPage(): ReactElement {
+  return <MembersView locale="en" />
+}

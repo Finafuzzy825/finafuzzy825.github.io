@@ -1,12 +1,24 @@
 import type { Metadata } from 'next'
+import type { ReactElement } from 'react'
 
-import { metadata as zhMetadata } from '@/app/(frontend)/cybersecurity/page'
+import { CybersecurityView } from '@/components/pages/cybersecurity-view'
+import { getCybersecurityEcosystem } from '@/content/cybersecurity'
 import { buildAlternates } from '@/i18n/routing'
 
-// 英文薄壳：复用中文页组件（正文本轮回退中文），仅覆写 hreflang/canonical 为 en。
+const PAGE_DESCRIPTION =
+  'Connecting professional users, institutional partners, real scenarios and capability evaluation to build a vendor-neutral, governable and continuously evolving cybersecurity industry ecosystem.'
+
 export const metadata: Metadata = {
-  ...zhMetadata,
   alternates: buildAlternates('/cybersecurity', 'en'),
+  description: PAGE_DESCRIPTION,
+  openGraph: {
+    description: PAGE_DESCRIPTION,
+    title: getCybersecurityEcosystem('en').title,
+    url: '/en/cybersecurity',
+  },
+  title: getCybersecurityEcosystem('en').title,
 }
 
-export { default } from '@/app/(frontend)/cybersecurity/page'
+export default function EnCybersecurityPage(): ReactElement {
+  return <CybersecurityView locale="en" />
+}

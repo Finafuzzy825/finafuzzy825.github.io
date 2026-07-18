@@ -1,12 +1,16 @@
 import type { Metadata } from 'next'
+import type { ReactElement } from 'react'
 
-import { metadata as zhMetadata } from '@/app/(frontend)/join/page'
+import { JoinView } from '@/components/pages/join-view'
 import { buildAlternates } from '@/i18n/routing'
 
-// 英文薄壳：复用中文页组件（正文本轮回退中文），仅覆写 hreflang/canonical 为 en。
 export const metadata: Metadata = {
-  ...zhMetadata,
   alternates: buildAlternates('/join', 'en'),
+  description:
+    'Learn about the value, ways to participate, collaboration process and FAQs for institutions joining the Alliance ecosystem.',
+  title: 'Institutional Ecosystem Co-building',
 }
 
-export { default } from '@/app/(frontend)/join/page'
+export default function EnJoinPage(): ReactElement {
+  return <JoinView locale="en" />
+}

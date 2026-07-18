@@ -11,11 +11,13 @@ test.describe('i18n 英文子树 /en', () => {
     await expect(nav.getByRole('link', { name: 'Working Groups' })).toBeVisible()
   })
 
-  test('英文静态页可访问且 lang=en', async ({ page }) => {
+  test('英文静态页可访问且 lang=en（联盟页正文已英文化）', async ({ page }) => {
     await page.goto('/en/alliance')
 
     await expect(page.locator('html')).toHaveAttribute('lang', 'en')
     await expect(page.locator('main#main-content')).toBeVisible()
+    await expect(page.getByRole('heading', { name: 'Our Purpose' })).toBeVisible()
+    await expect(page.getByRole('heading', { name: 'Shared Values' })).toBeVisible()
   })
 
   test('英文动态新闻详情页可访问', async ({ page }) => {

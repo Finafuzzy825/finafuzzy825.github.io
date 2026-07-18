@@ -1,12 +1,17 @@
 import type { Metadata } from 'next'
+import type { ReactElement } from 'react'
 
-import { metadata as zhMetadata } from '@/app/(frontend)/alliance/page'
+import { AllianceView } from '@/components/pages/alliance-view'
 import { buildAlternates } from '@/i18n/routing'
 
-// 英文薄壳：复用中文页组件（正文本轮回退中文），仅覆写 hreflang/canonical 为 en。
+// 英文联盟页：已做正文英文初稿（AllianceView locale="en"），不再回退中文。
 export const metadata: Metadata = {
-  ...zhMetadata,
   alternates: buildAlternates('/alliance', 'en'),
+  description:
+    'Learn about the Zhongguancun Self-Reliant Large Model Industry Alliance — its purpose, overview, shared values and collaboration mechanisms.',
+  title: 'About the Alliance',
 }
 
-export { default } from '@/app/(frontend)/alliance/page'
+export default function EnAlliancePage(): ReactElement {
+  return <AllianceView locale="en" />
+}

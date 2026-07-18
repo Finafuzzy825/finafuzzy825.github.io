@@ -3,24 +3,48 @@ import Link from 'next/link'
 import type { ReactElement } from 'react'
 
 import { SITE_NAME, SITE_NAVIGATION } from '@/config/site'
+import { dict, type Dictionary } from '@/i18n/dictionary'
+import type { Locale } from '@/i18n/locales'
+import { localizePath } from '@/i18n/routing'
 import { LanguageToggle } from './language-toggle'
 import { SiteNavigationLink } from './site-navigation-link'
 
-function NavigationLinks(): ReactElement {
+// 导航路由 → 字典 nav 键，用于按 locale 取标签。
+const NAV_LABEL_KEYS: Readonly<Record<string, keyof Dictionary['nav']>> = {
+  '/alliance': 'alliance',
+  '/cybersecurity': 'cybersecurity',
+  '/members': 'members',
+  '/news': 'news',
+  '/working-groups': 'workingGroups',
+}
+
+function NavigationLinks({ locale }: { locale: Locale }): ReactElement {
+  const nav = dict(locale).nav
+
   return (
     <>
-      {SITE_NAVIGATION.map((item) => (
-        <SiteNavigationLink href={item.href} key={item.href} label={item.label} />
-      ))}
+      {SITE_NAVIGATION.map((item) => {
+        const labelKey = NAV_LABEL_KEYS[item.href]
+
+        return (
+          <SiteNavigationLink
+            href={localizePath(item.href, locale)}
+            key={item.href}
+            label={labelKey ? nav[labelKey] : item.label}
+          />
+        )
+      })}
     </>
   )
 }
 
-export function SiteHeader(): ReactElement {
+export function SiteHeader({ locale }: { locale: Locale }): ReactElement {
+  const t = dict(locale).header
+
   return (
     <header className="site-header">
       <div className="site-container flex min-h-20 items-center justify-between gap-4">
-        <Link className="flex min-w-0 items-center gap-3" href="/">
+        <Link className="flex min-w-0 items-center gap-3" href={localizePath('/', locale)}>
           <Image
             alt=""
             aria-hidden="true"
@@ -35,35 +59,38 @@ export function SiteHeader(): ReactElement {
           </span>
         </Link>
 
-        <nav aria-label="主导航" className="hidden items-center gap-1 min-[1280px]:flex">
-          <NavigationLinks />
+        <nav aria-label={t.mainNav} className="hidden items-center gap-1 min-[1280px]:flex">
+          <NavigationLinks locale={locale} />
         </nav>
 
         <div className="hidden items-center gap-3 min-[1280px]:flex">
-          <Link className="button-primary" href="/join">
-            机构合作申请
+          <Link className="button-primary" href={localizePath('/join', locale)}>
+            {t.institutionApply}
           </Link>
-          <LanguageToggle />
+          <LanguageToggle locale={locale} />
         </div>
 
         {/* 窄屏(<1280px)常驻控件簇：「菜单」按钮在任何宽度都伸手可点，
             不再埋进折叠菜单里。桌面端(≥1280px)仍用上方的控件簇。 */}
         <div className="flex items-center gap-2 min-[1280px]:hidden">
           <details className="mobile-menu">
-            <summary aria-label="打开网站导航" className="mobile-menu__trigger">
-              <span aria-hidden="true">菜单</span>
+            <summary aria-label={t.openNav} className="mobile-menu__trigger">
+              <span aria-hidden="true">{t.menu}</span>
             </summary>
             <div className="mobile-menu__panel">
-              <nav aria-label="移动导航" className="grid gap-1">
-                <NavigationLinks />
+              <nav aria-label={t.mobileNav} className="grid gap-1">
+                <NavigationLinks locale={locale} />
               </nav>
               <div className="mt-4 grid gap-3 border-t border-[var(--alliance-border)] pt-4">
-                <Link className="button-primary justify-center" href="/join">
-                  机构合作申请
+                <Link
+                  className="button-primary justify-center"
+                  href={localizePath('/join', locale)}
+                >
+                  {t.institutionApply}
                 </Link>
               </div>
               <div className="mt-4 flex justify-center gap-3 border-t border-[var(--alliance-border)] pt-4">
-                <LanguageToggle />
+                <LanguageToggle locale={locale} />
               </div>
             </div>
           </details>

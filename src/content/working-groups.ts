@@ -1,3 +1,4 @@
+import { type Locale } from '@/i18n/locales'
 import type { WorkingGroupSummary } from '@/types/content'
 
 export const WORKING_GROUPS: readonly WorkingGroupSummary[] = [
@@ -45,4 +46,70 @@ export function getWorkingGroupSlugs(): string[] {
 
 export function getWorkingGroupBySlug(slug: string): WorkingGroupSummary | undefined {
   return WORKING_GROUPS.find((group) => group.slug === slug)
+}
+
+// 英文初稿覆盖层（enDraft，待人工校对）：按 slug 覆写可翻译文本字段。
+// 中文常量保持权威，路由 slug 与结构不变。
+type WorkingGroupOverlay = Partial<
+  Pick<
+    WorkingGroupSummary,
+    | 'title'
+    | 'description'
+    | 'ecosystemLabel'
+    | 'leads'
+    | 'outcomes'
+    | 'responsibilities'
+    | 'researchDirections'
+  >
+>
+
+const WORKING_GROUPS_EN: Readonly<Record<string, WorkingGroupOverlay>> = {
+  cybersecurity: {
+    description:
+      'Bringing together trusted defenders and real offense-defense needs, and uniting security enterprises, university labs and frontline researchers to turn professional users, real scenarios, in-depth data and capability evaluation into a continuously running self-reliant large-model cybersecurity ecosystem. Professional forces are cordially invited to co-build.',
+    ecosystemLabel: 'Cybersecurity Ecosystem · Priority Initiative',
+    leads: [
+      {
+        name: 'ZGC Self-Reliant Large Model Industry Alliance',
+        named: true,
+        role: 'Coordination and ecosystem hosting',
+      },
+      { name: 'Zhipu', named: true, role: 'Model and technical support' },
+      { name: 'Tsinghua University', named: true, role: 'Academic and technical guidance' },
+      { name: 'Datainsecurity', named: true, role: 'Industry research and ecosystem connection' },
+      { name: 'CloudInfinite', named: true, role: 'Technology platform and project operations' },
+      {
+        name: 'Security enterprises, universities, labs and professional researchers co-building according to their strengths',
+        named: false,
+        role: 'Ecosystem partners',
+      },
+    ],
+    outcomes: [
+      'Continuously operating the “Cybersecurity Professionals Open Program”, offering controlled access to cybersecurity enterprises, research institutions, university teams and professional researchers, and gathering trusted defenders and real needs.',
+    ],
+    researchDirections: [
+      'Code auditing and vulnerability discovery',
+      'Secure development and penetration testing',
+      'Cyber mapping and threat intelligence',
+    ],
+    responsibilities: [
+      'Operate the “Cybersecurity Professionals Open Program” and ecosystem co-building program as the entry for professional users, connecting security enterprises, labs, universities and professional researchers',
+      'Build a system of in-depth cybersecurity data and tasks that is trainable, evaluable and verifiable (real offense-defense, competitions, cyber mapping, dynamic ranges)',
+      'Establish validation and application mechanisms of self-reliant large models for the cybersecurity industry (trusted closed testing, professional validation and scenario deployment)',
+      'Proactively accept guidance from authorities on data compliance and governance of high-risk capabilities',
+    ],
+    title: 'Cybersecurity Working Group',
+  },
+}
+
+/** 按 locale 解析工作组：en 覆盖存在则替换文本字段，否则回退中文。 */
+export function localizeWorkingGroup(
+  group: WorkingGroupSummary,
+  locale: Locale,
+): WorkingGroupSummary {
+  if (locale === 'zh') return group
+
+  const overlay = WORKING_GROUPS_EN[group.slug]
+
+  return overlay ? { ...group, ...overlay } : group
 }

